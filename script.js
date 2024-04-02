@@ -4,6 +4,8 @@ let search = document.getElementById('search');
 let cityVal = document.getElementById('city');
 let tenDays = document.getElementById('tenDays');
 
+// comment
+
 const bosniaHerzegovinaCities = [
   { name: 'Sarajevo', latitude: 43.8563, longitude: 18.4131 },
   { name: 'Banja Luka', latitude: 44.7758, longitude: 17.1854 },
