@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6M3RT5D12Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-6M3RT5D12Q');
+    </script>
+    <meta name="description"
+      content="✅ Najtačnija vremenska prognoza za sve gradove ili bilo koje drugo odabrano mjesto. Budite ispred vremena uz naše pouzdane prognoze.Provjerite sada! " />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!---------------  CSS  --------------------->
+    <link href="novanova.png" rel="shortcut icon" type="x-icon" />
+    <link href="https://novovrijeme.com" rel="canonical" />
+    <link href="style.css" rel="stylesheet" />
+    <title>Vrijeme za danas,sutra i idućih 10 dana - Novo vrijeme</title>
+    <!---------------  IONICONS  --------------------->
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <div style="display: flex; justify-content: center">
+        <img alt="Girl in a jacket" src="large4.png"
+          style="vertical-align: bottom; width: 300px; height: 200px; max-width: 100%;" />
+      </div>
+      <h1 class="h1">Vrijeme za danas,sutra i idućih 10 dana - Novo vrijeme</h1>
+    </header>
+    <style type="text/css">
+      body {
+        background-image: url('ano4.jpg');
+      }
+    </style>
+    <div class="container">
+      <form class="search_box" onsubmit=" return getWeather(event)">
+        <input autocomplete="on" id="city" placeholder="Upišite ime grada" type="text" value="" />
+        <button id="search"><ion-icon class="icon" name="search"></ion-icon></button>
+      </form>
+      <div id="show"></div>
+      <h2>Vrijeme za 10 dana</h2>
+      <div style="display: flex; padding: 12px; border-bottom: 1px solid gray; align-items: center; width: 100%">
+        <div style="flex: 1"></div>
+        <div style="flex: 1; display: flex; column-gap: 8px">
+          <p>3:00</p>
+          <p>9:00</p>
+          <p>15:00</p>
+          <p>21:00</p>
+        </div>
+        <div style="flex: 1">
+          <p>Min/Max</p>
+        </div>
+      </div>
+      <div id="tenDays" style="width: 100%"></div>
+    </div>
+    <!---------------  SCRIPT  --------------------->
+    <script src="script.js"></script>
+  </body>
+
+</html>

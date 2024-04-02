@@ -1,0 +1,281 @@
+{
+  "totalResults": 5,
+  "_links": {
+    "self": {
+      "href": "/api/v0/locations"
+    },
+    "page": {
+      "href": "/api/v0/locations{?page}",
+      "templated": true
+    },
+    "search": {
+      "href": "/api/v0/locations/search{?q}",
+      "templated": true
+    },
+    "location": [
+      {
+        "href": "/api/v0/locations/2-3191281"
+      },
+      {
+        "href": "/api/v0/locations/2-498650"
+      },
+      {
+        "href": "/api/v0/locations/2-498645"
+      },
+      {
+        "href": "/api/v0/locations/2-3191280"
+      },
+      {
+        "href": "/api/v0/locations/2-3266618"
+      }
+    ]
+  },
+  "_embedded": {
+    "location": [
+      {
+        "category": {
+          "id": "CA01",
+          "name": "Capital"
+        },
+        "id": "2-3191281",
+        "name": "Sarajevo",
+        "position": {
+          "lat": 43.84864,
+          "lon": 18.35644
+        },
+        "elevation": 509,
+        "timeZone": "Europe/Sarajevo",
+        "urlPath": "Bosnia and Herzegovina/Federation of Bosnia and Herzegovina/Sarajevo Canton/Sarajevo",
+        "country": {
+          "id": "BA",
+          "name": "Bosnia and Herzegovina"
+        },
+        "region": {
+          "id": "BA/01",
+          "name": "Federation of Bosnia and Herzegovina"
+        },
+        "subregion": {
+          "id": "BA/01/3343737",
+          "name": "Sarajevo Canton"
+        },
+        "isInOcean": false,
+        "_links": {
+          "self": {
+            "href": "/api/v0/locations/2-3191281"
+          },
+          "celestialevents": {
+            "href": "/api/v0/locations/2-3191281/celestialevents"
+          },
+          "forecast": {
+            "href": "/api/v0/locations/2-3191281/forecast"
+          },
+          "cameras": {
+            "href": "/api/v0/locations/2-3191281/cameras"
+          },
+          "mapfeature": {
+            "href": "/api/v0/locations/2-3191281/mapfeature"
+          },
+          "currenthour": {
+            "href": "/api/v0/locations/2-3191281/forecast/currenthour"
+          }
+        }
+      },
+      {
+        "category": {
+          "id": "CK01",
+          "name": "Populated place"
+        },
+        "id": "2-498650",
+        "name": "Sarayevo",
+        "position": {
+          "lat": 54.06667,
+          "lon": 54.61667
+        },
+        "elevation": 200,
+        "timeZone": "Asia/Yekaterinburg",
+        "urlPath": "Russia/Bashkortostan Republic/Sarayevo",
+        "country": {
+          "id": "RU",
+          "name": "Russia"
+        },
+        "region": {
+          "id": "RU/08",
+          "name": "Bashkortostan Republic"
+        },
+        "isInOcean": false,
+        "_links": {
+          "self": {
+            "href": "/api/v0/locations/2-498650"
+          },
+          "celestialevents": {
+            "href": "/api/v0/locations/2-498650/celestialevents"
+          },
+          "forecast": {
+            "href": "/api/v0/locations/2-498650/forecast"
+          },
+          "cameras": {
+            "href": "/api/v0/locations/2-498650/cameras"
+          },
+          "mapfeature": {
+            "href": "/api/v0/locations/2-498650/mapfeature"
+          },
+          "currenthour": {
+            "href": "/api/v0/locations/2-498650/forecast/currenthour"
+          },
+          "observations": [
+            {
+              "href": "/api/v0/locations/2-498650/observations"
+            },
+            {
+              "href": "/api/v0/locations/2-498650/observations/nearby"
+            }
+          ]
+        }
+      },
+      {
+        "category": {
+          "id": "CK01",
+          "name": "Populated place"
+        },
+        "id": "2-498645",
+        "name": "Sarayevo",
+        "position": {
+          "lat": 60.13927,
+          "lon": 45.28503
+        },
+        "elevation": 130,
+        "timeZone": "Europe/Moscow",
+        "urlPath": "Russia/Vologda Oblast/Sarayevo",
+        "country": {
+          "id": "RU",
+          "name": "Russia"
+        },
+        "region": {
+          "id": "RU/85",
+          "name": "Vologda Oblast"
+        },
+        "isInOcean": false,
+        "_links": {
+          "self": {
+            "href": "/api/v0/locations/2-498645"
+          },
+          "celestialevents": {
+            "href": "/api/v0/locations/2-498645/celestialevents"
+          },
+          "forecast": {
+            "href": "/api/v0/locations/2-498645/forecast"
+          },
+          "cameras": {
+            "href": "/api/v0/locations/2-498645/cameras"
+          },
+          "mapfeature": {
+            "href": "/api/v0/locations/2-498645/mapfeature"
+          },
+          "currenthour": {
+            "href": "/api/v0/locations/2-498645/forecast/currenthour"
+          },
+          "observations": [
+            {
+              "href": "/api/v0/locations/2-498645/observations"
+            },
+            {
+              "href": "/api/v0/locations/2-498645/observations/nearby"
+            }
+          ]
+        }
+      },
+      {
+        "category": {
+          "id": "KE21",
+          "name": "Railway station"
+        },
+        "id": "2-3191280",
+        "name": "Sarajevo",
+        "position": {
+          "lat": 43.86044,
+          "lon": 18.39905
+        },
+        "elevation": 549,
+        "timeZone": "Europe/Sarajevo",
+        "urlPath": "Bosnia and Herzegovina/Federation of Bosnia and Herzegovina/Sarajevo Canton/Sarajevo",
+        "country": {
+          "id": "BA",
+          "name": "Bosnia and Herzegovina"
+        },
+        "region": {
+          "id": "BA/01",
+          "name": "Federation of Bosnia and Herzegovina"
+        },
+        "subregion": {
+          "id": "BA/01/3343737",
+          "name": "Sarajevo Canton"
+        },
+        "isInOcean": false,
+        "_links": {
+          "self": {
+            "href": "/api/v0/locations/2-3191280"
+          },
+          "celestialevents": {
+            "href": "/api/v0/locations/2-3191280/celestialevents"
+          },
+          "forecast": {
+            "href": "/api/v0/locations/2-3191280/forecast"
+          },
+          "cameras": {
+            "href": "/api/v0/locations/2-3191280/cameras"
+          },
+          "mapfeature": {
+            "href": "/api/v0/locations/2-3191280/mapfeature"
+          },
+          "currenthour": {
+            "href": "/api/v0/locations/2-3191280/forecast/currenthour"
+          }
+        }
+      },
+      {
+        "category": {
+          "id": "CK01",
+          "name": "Populated place"
+        },
+        "id": "2-3266618",
+        "name": "Stari Grad",
+        "position": {
+          "lat": 43.68599,
+          "lon": 18.01206
+        },
+        "elevation": 845,
+        "timeZone": "Europe/Sarajevo",
+        "urlPath": "Bosnia and Herzegovina/Federation of Bosnia and Herzegovina/Stari Grad",
+        "country": {
+          "id": "BA",
+          "name": "Bosnia and Herzegovina"
+        },
+        "region": {
+          "id": "BA/01",
+          "name": "Federation of Bosnia and Herzegovina"
+        },
+        "isInOcean": false,
+        "_links": {
+          "self": {
+            "href": "/api/v0/locations/2-3266618"
+          },
+          "celestialevents": {
+            "href": "/api/v0/locations/2-3266618/celestialevents"
+          },
+          "forecast": {
+            "href": "/api/v0/locations/2-3266618/forecast"
+          },
+          "cameras": {
+            "href": "/api/v0/locations/2-3266618/cameras"
+          },
+          "mapfeature": {
+            "href": "/api/v0/locations/2-3266618/mapfeature"
+          },
+          "currenthour": {
+            "href": "/api/v0/locations/2-3266618/forecast/currenthour"
+          }
+        }
+      }
+    ]
+  }
+}
