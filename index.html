@@ -36,29 +36,25 @@
       </div>
       <h1 class="h1">Vrijeme za danas, sutra i idućih 10 dana.</h1>
     </header>
-    <style type="text/css">
-      body {
-        background-image: url('images/pozadinska_slika.jpg');
-        height: 1200px;
-      }
-    </style>
     <div class="container">
       <form class="search_box" onsubmit=" return getWeather(event)">
         <input autocomplete="on" id="city" placeholder="Upišite ime grada" type="text" value="" />
         <button id="search"><ion-icon class="icon" name="search"></ion-icon></button>
       </form>
       <div id="show"></div>
-      <h2>Vrijeme za 10 dana</h2>
-      <div style="display: flex; padding: 12px; border-bottom: 1px solid gray; align-items: center; width: 100%">
-        <div style="flex: 1"></div>
-        <div style="flex: 1; display: flex; column-gap: 8px">
-          <p>3:00</p>
-          <p>9:00</p>
-          <p>15:00</p>
-          <p>21:00</p>
-        </div>
-        <div style="flex: 1">
-          <p>Min/Max</p>
+      <div id="cityInfo" style="width: 100%;display: none;">
+        <h2 style="text-align: center;">Vrijeme za 10 dana</h2>
+        <div style="display: flex; padding: 12px; border-bottom: 1px solid gray; align-items: center; width: 100%">
+          <div style="flex: 1"></div>
+          <div style="flex: 1; display: flex; column-gap: 8px">
+            <p>3:00</p>
+            <p>9:00</p>
+            <p>15:00</p>
+            <p>21:00</p>
+          </div>
+          <div style="flex: 1">
+            <p>Min/Max</p>
+          </div>
         </div>
       </div>
       <div id="tenDays" style="width: 100%"></div>

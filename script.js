@@ -3,6 +3,7 @@ let show = document.getElementById('show');
 let search = document.getElementById('search');
 let cityVal = document.getElementById('city');
 let tenDays = document.getElementById('tenDays');
+const cityInfo = document.getElementById('cityInfo');
 
 // comment
 
@@ -165,6 +166,7 @@ let getWeather = async (event) => {
      </div>`;
     }
     tenDays.innerHTML = tenDaysHtml;
+    cityInfo.style.display = 'block';
   }
 };
 
