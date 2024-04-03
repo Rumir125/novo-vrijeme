@@ -151,7 +151,7 @@ let getWeather = async (event) => {
             <img src="./svg/${day.quarterFour}.svg" width=36 height=36 style="display:${day.quarterFour ? 'block' : 'none'}"/>
           </div>
         </div>
-        <div style="flex: 1">
+        <div style="flex: 1; color:#BF3131;">
           <p>${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
         </div>
      </div>`;
