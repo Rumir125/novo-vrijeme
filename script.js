@@ -134,11 +134,11 @@ let getWeather = async (event) => {
           <div class="temp_container">
           <div>
               <h4 class="title">min</h4>
-              <h4 class="temp">${next6Hours.details.air_temperature_min}&#176;</h4>
+              <h4 class="temp">${next6Hours.details.air_temperature_min}&#8451;</h4>
           </div>
           <div>
               <h4 class="title">max</h4>
-              <h4 class="temp">${next6Hours.details.air_temperature_max}&#176;</h4>
+              <h4 class="temp">${next6Hours.details.air_temperature_max}&#8451;</h4>
           </div>  
         </div>
  
@@ -161,7 +161,7 @@ let getWeather = async (event) => {
           </div>
         </div>
         <div style="flex: 1">
-          <p>${Math.round(day.minTemp)}&#176/${Math.round(day.maxTemp)}&#176</p>
+          <p>${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
         </div>
      </div>`;
     }
