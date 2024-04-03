@@ -151,11 +151,13 @@ let getWeather = async (event) => {
         <div style="flex: 1">
           <p>${daysOfWeek[date.getDay()]} ${date.getDate()} ${monthInYear[date.getMonth()]} </p>
         </div>
-        <div style="flex: 1;display:flex; column-gap:8px">
-          <img src="./svg/${day.quarterOne}.svg" width=36 height=36/>
-          <img src="./svg/${day.quarterTwo}.svg" width=36 height=36 style="display:${day.quarterTwo ? 'block' : 'none'}"/>
-          <img src="./svg/${day.quarterThree}.svg" width=36 height=36 style="display:${day.quarterThree ? 'block' : 'none'}"/>
-          <img src="./svg/${day.quarterFour}.svg" width=36 height=36 style="display:${day.quarterFour ? 'block' : 'none'}"/>
+        <div style="flex:1">
+          <div style="display:flex; column-gap:8px; max-width:170px; justify-content:flex-end">
+            <img src="./svg/${day.quarterOne}.svg" width=36 height=36/>
+            <img src="./svg/${day.quarterTwo}.svg" width=36 height=36 style="display:${day.quarterTwo ? 'block' : 'none'}"/>
+            <img src="./svg/${day.quarterThree}.svg" width=36 height=36 style="display:${day.quarterThree ? 'block' : 'none'}"/>
+            <img src="./svg/${day.quarterFour}.svg" width=36 height=36 style="display:${day.quarterFour ? 'block' : 'none'}"/>
+          </div>
         </div>
         <div style="flex: 1">
           <p>${Math.round(day.minTemp)}&#176/${Math.round(day.maxTemp)}&#176</p>
