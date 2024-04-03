@@ -161,7 +161,7 @@ let getWeather = async (event) => {
           </div>
         </div>
         <div style="flex: 1">
-          <p>${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
+          <p>${Math.round(day.minTemp)}&#8451 / ${Math.round(day.maxTemp)}&#8451;</p>
         </div>
      </div>`;
     }
