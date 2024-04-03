@@ -148,12 +148,6 @@ body {
   font-weight: 400;
   color: var(--dark-color);
 }
-.temp_container {
-  display: flex;
-  justify-content: center;
-  margin: 1rem 0 1rem 0;
-  text-align: center;
-}
 .temp_container div {
   padding: 1rem 1.5rem;
 }

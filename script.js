@@ -131,16 +131,7 @@ let getWeather = async (event) => {
         <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center">
           <img src="./svg/${nextHour.summary.symbol_code}.svg" width=64 height=64/>
           <h1 style="white-space:nowrap">${Math.round(currentDetails.air_temperature)}&#8451;</h1>
-          <div class="temp_container">
-          <div>
-              <h4 class="title">min</h4>
-              <h4 class="temp">${next6Hours.details.air_temperature_min}&#8451;</h4>
-          </div>
-          <div>
-              <h4 class="title">max</h4>
-              <h4 class="temp">${next6Hours.details.air_temperature_max}&#8451;</h4>
-          </div>  
-        </div>
+           </div>
  
         </div>
         `;
