@@ -169,3 +169,6 @@ p {
   font-size: 16px;
 
 }
+.input_box {
+    transition: background-color 5000000s ease-in-out 0s;
+}
