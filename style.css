@@ -53,7 +53,7 @@ body {
   box-shadow: 0 1.8rem 3.7rem var(--box_shadow);
 }
 .container {
-  width: 50vw;
+  width: 90vw;
   height: auto;
   background: var(--background);
   backdrop-filter: blur(0.5rem);
