@@ -85,7 +85,7 @@ let getWeather = async (event) => {
   let params = new URL(document.location.toString()).searchParams;
   let cityParam = params.get('city');
   let cityValue = cityVal.value || cityParam;
-  if (cityValue.length == 0) {
+  if (!cityValue) {
     show.innerHTML = `<h3 class="error">Upišite ime grada</h3>`;
   } else {
     const searchedCity = bosniaHerzegovinaCities.find((searchElement) => searchElement.name.toLowerCase() === cityValue.toLowerCase());
@@ -93,21 +93,19 @@ let getWeather = async (event) => {
     let longitude;
     let country;
     if (!searchedCity) {
-      let locationAPI = `https://api.api-ninjas.com/v1/geocoding?city=${cityValue}`;
-      const res = await fetch(locationAPI, {
-        headers: {
-          'X-Api-Key': 'JvxGcUPQ7zInqVS76bztCw==KWQbOOZwy2SE4i2R',
-        },
-      });
+      let locationAPI = `https://novovrijeme.com/api/v2/location?q=${cityValue}`;
+      const res = await fetch(locationAPI);
       const locationData = await res.json();
-      console.log('called API', locationData);
-      if (!locationData.length) {
+      const locations = locationData?._embedded?.location;
+      if (!locations?.length) {
         show.innerHTML = `<h3 class="error">City not found</h3>`;
         return;
       }
-      latitude = locationData[0].latitude;
-      longitude = locationData[0].longitude;
-      country = locationData[0].country;
+      const closestLocation = locations[locations.length - 1];
+      console.log('called API', locationData, closestLocation);
+      latitude = closestLocation.position.lat;
+      longitude = closestLocation.position.lon;
+      country = closestLocation.country.name;
     } else {
       latitude = searchedCity.latitude;
       longitude = searchedCity.longitude;
@@ -121,7 +119,6 @@ let getWeather = async (event) => {
     const timeSeries = weatherData.properties.timeseries;
     const currentDetails = timeSeries[0].data.instant.details;
     const nextHour = timeSeries[0].data.next_1_hours;
-    const next6Hours = timeSeries[0].data.next_6_hours;
     const weatherDataByDay = getWeatherDataByDay(timeSeries);
     console.log(timeSeries, weatherDataByDay);
 
@@ -145,10 +142,10 @@ let getWeather = async (event) => {
         </div>
         <div style="flex:1">
           <div style="display:flex; column-gap:8px; max-width:170px; justify-content:flex-end">
-            <img src="./svg/${day.quarterOne}.svg" width=36 height=36/>
-            <img src="./svg/${day.quarterTwo}.svg" width=36 height=36 style="display:${day.quarterTwo ? 'block' : 'none'}"/>
-            <img src="./svg/${day.quarterThree}.svg" width=36 height=36 style="display:${day.quarterThree ? 'block' : 'none'}"/>
-            <img src="./svg/${day.quarterFour}.svg" width=36 height=36 style="display:${day.quarterFour ? 'block' : 'none'}"/>
+            ${day.quarterOne ? `<img src="./svg/${day.quarterOne}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
+            ${day.quarterTwo ? `<img src="./svg/${day.quarterTwo}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
+            ${day.quarterThree ? `<img src="./svg/${day.quarterThree}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
+            ${day.quarterFour ? `<img src="./svg/${day.quarterFour}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
           </div>
         </div>
         <div style="flex: 1; color:#BF3131;">
