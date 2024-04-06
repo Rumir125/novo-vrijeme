@@ -34,9 +34,9 @@ body {
   flex-direction: column;
 }
 .title {
-  font-size: 3rem;
-  color: #1177aa;
-  font-weight: 500;
+  font-size: 3.3rem;
+  color: #2f87c2;
+  font-weight: 600;
   font-family: Helvetica sans-serif;
   font-style: oblique;
   text-align: center;
@@ -49,8 +49,6 @@ body {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  border-radius: 2rem;
-  box-shadow: 0 1.8rem 3.7rem var(--box_shadow);
   padding: 8px;
 }
 .container {
