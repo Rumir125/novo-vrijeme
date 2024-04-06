@@ -33,7 +33,7 @@ body {
   /* justify-content: center; */
   flex-direction: column;
 }
-.h1 {
+.title {
   font-size: 3rem;
   font-weight: 400;
   font-family: "Poppins", sans-serif;
@@ -51,6 +51,7 @@ body {
   justify-content: center;
   border-radius: 2rem;
   box-shadow: 0 1.8rem 3.7rem var(--box_shadow);
+  padding: 8px;
 }
 .container {
   width: 90vw;
@@ -64,6 +65,7 @@ body {
   border-radius: 3rem;
   box-shadow: 0 1.8rem 3.7rem var(--box_shadow);
   margin-top: 3rem;
+  padding: 8px 0px;
 }
 .search_box {
   position: relative;
@@ -75,7 +77,6 @@ body {
   padding: 1rem 2rem;
   backdrop-filter: blur(0.4rem) saturate(180%);
   box-shadow: 0 1.8rem 3.7rem var(--box_shadow);
-  margin-top: 12px;
 }
 
 @media (max-width: 760px) {

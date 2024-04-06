@@ -17,7 +17,8 @@ let getWeather = async (event) => {
   let cityParam = params.get('city');
   let cityValue = locationInput.value || cityParam;
   if (!cityValue) {
-    show.innerHTML = `<h3 class="error">Upišite ime grada</h3>`;
+    // show.innerHTML = `<h3 class="error">Upišite ime grada</h3>`;
+    show.innerHTML = '';
     tenDays.innerHTML = '';
     cityInfo.style.display = 'none';
     return;
@@ -36,7 +37,6 @@ let getWeather = async (event) => {
       return;
     }
     const closestLocation = locations[locations.length - 1];
-    console.log('called API', locations);
     const latitude = closestLocation.latitude;
     const longitude = closestLocation.longitude;
     const country = closestLocation.country;
@@ -77,7 +77,7 @@ let getWeather = async (event) => {
             ${day.quarterFour ? `<img src="./svg/${day.quarterFour}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
           </div>
         </div>
-        <div style="flex: 1; color:#BF3131;">
+        <div style="flex: 1;">
           <p>${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
         </div>
      </div>`;
@@ -126,7 +126,6 @@ const getWeatherDataByDay = (timeseries) => {
       tenDaysData[currentDate].maxTemp = next6Hours?.air_temperature_max;
     }
   }
-
   return Object.values(tenDaysData).slice(0, 10);
 };
 
