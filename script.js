@@ -86,7 +86,7 @@ let getWeather = async (event) => {
   let cityParam = params.get('city');
   let cityValue = cityVal.value || cityParam;
   if (!cityValue) {
-    show.innerHTML = `<h3 class="error">Upišite ime grada</h3>`;
+    show.innerHTML = ``;
   } else {
     const searchedCity = bosniaHerzegovinaCities.find((searchElement) => searchElement.name.toLowerCase() === cityValue.toLowerCase());
     let latitude;
