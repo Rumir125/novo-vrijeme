@@ -148,3 +148,8 @@ locationInput.addEventListener('input', (event) => {
 function showresultbox () {
   document.getElementById('resultbox').style.display = 'block';
 }
+window.onclick = function(event) {
+  if (!event.target.matches('.input_box')) {
+    document.getElementById('resultbox').style.display = 'none';
+  }
+}
