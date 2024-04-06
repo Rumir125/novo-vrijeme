@@ -35,8 +35,8 @@ body {
 }
 .h1 {
   font-size: 3rem;
-  color: #0c9ee7;
-  font-weight: 400;
+  color: #1177aa;
+  font-weight: 500;
   font-family: Helvetica sans-serif;
   font-style: oblique;
   text-align: center;
@@ -49,7 +49,6 @@ body {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  border-radius: 2rem;
 }
 .container {
   width: 90vw;
