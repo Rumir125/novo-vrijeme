@@ -81,6 +81,9 @@ body {
   .search_box {
     width: 100%;
   }
+  .result-box {
+    width: 100%;
+  }
 }
 
 .search_box input {
@@ -178,20 +181,18 @@ p {
     transition: background-color 5000000s ease-in-out 0s;
 }
 .result-box {
-  width: 25vw;
-  align-items: left;
+  width: 50%;
+  margin-top: 210px;
+  position: absolute;
   height: auto;
   display: flex;
   box-shadow: 0 1.8rem 3.7rem var(--box_shadow);
   flex-direction: column;
-  justify-content: left;
   border-radius: 1.5rem;
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
-  margin-right: 64%;
 }
 .result-box ul {
-  width: 100%;
   padding: 7px 5px;
 }
 .result-box ul li {
@@ -200,7 +201,6 @@ p {
   border-radius: 0.8rem;
   padding: 14px;
   cursor: pointer;
-  justify-content: center;
 }
 .result-box ul li:hover {
   background: #7dade4;
