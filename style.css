@@ -194,6 +194,7 @@ margin-top: 0px;
 .result-box ul li {
   list-style: none;
   font-size: 1.8rem;
+  font-weight: 300;
   border-radius: 0.5rem;
   padding: 10px;
   cursor: pointer;
