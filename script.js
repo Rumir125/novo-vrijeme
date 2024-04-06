@@ -144,3 +144,7 @@ locationInput.addEventListener('input', (event) => {
     console.log(searchedLocations);
   }, 200);
 });
+
+function showresultbox () {
+  document.getElementById('resultbox').style.display = 'block';
+}

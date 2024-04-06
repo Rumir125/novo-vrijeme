@@ -43,9 +43,9 @@
     </header>
     <div class="container">
       <form class="search_box" onsubmit=" return getWeather(event)">
-        <input class="input_box" autocomplete="on" id="city" placeholder="Upišite ime grada" type="text" value="" />
+        <input class="input_box" autocomplete="off" id="city" placeholder="Upišite ime grada" type="text" value="" onclick="showresultbox()" />
         <button id="search"><ion-icon class="icon" name="search"></ion-icon></button>
-        <div class="result-box">
+        <div class="result-box" style="display: none;" id="resultbox">
           <ul>
             <li>Sarajevo</li>
             <li>Mostar</li>
