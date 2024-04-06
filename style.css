@@ -180,7 +180,7 @@ p {
 }
 .result-box {
   width: 100%;
-
+  
   top: 5.2rem;
   left: 0;
   position:absolute;
@@ -193,7 +193,7 @@ margin-top: 0px;
 }
 .result-box ul li {
   list-style: none;
-  font-size: 1rem;
+  font-size: 1.8rem;
   border-radius: 0.5rem;
   padding: 10px;
   cursor: pointer;
