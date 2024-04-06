@@ -19,13 +19,16 @@ let getWeather = async (event) => {
     show.innerHTML = `<h3 class="error">Upišite ime grada</h3>`;
     return;
   }
+
+  show.innerHTML = `<h3 class="error">Učitavanje podataka u toku...</h3>`;
+  tenDays.innerHTML = '';
+  cityInfo.style.display = 'none';
+
   let locationAPI = `${serverUrl}/location?q=${cityValue}`;
   const res = await fetch(locationAPI);
   const locations = await res.json();
   if (!locations?.length) {
     show.innerHTML = `<h3 class="error">City not found</h3>`;
-    tenDays.innerHTML = '';
-    cityInfo.style.display = 'none';
     return;
   }
   const closestLocation = locations[locations.length - 1];
@@ -33,6 +36,7 @@ let getWeather = async (event) => {
   const latitude = closestLocation.latitude;
   const longitude = closestLocation.longitude;
   const country = closestLocation.country;
+  const name = closestLocation.name;
   const weatherAPIUrl = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${latitude}&lon=${longitude}`;
   const weatherRes = await fetch(weatherAPIUrl);
   const weatherData = await weatherRes.json();
@@ -45,7 +49,7 @@ let getWeather = async (event) => {
 
   cityVal.value = '';
   show.innerHTML = `
-        <h2>${cityValue}, ${country}</h2>
+        <h2>${name}, ${country}</h2>
         <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center">
           <img src="./svg/${nextHour.summary.symbol_code}.svg" width=64 height=64/>
           <h1 style="white-space:nowrap; margin-left: 1.5rem;">${Math.round(currentDetails.air_temperature)}&#8451;</h1>
