@@ -24,32 +24,33 @@ let getWeather = async (event) => {
   tenDays.innerHTML = '';
   cityInfo.style.display = 'none';
 
-  let locationAPI = `${serverUrl}/location?q=${cityValue}`;
-  const res = await fetch(locationAPI);
-  const locations = await res.json();
-  if (!locations?.length) {
-    show.innerHTML = `<h3 class="error">City not found</h3>`;
-    return;
-  }
-  const closestLocation = locations[locations.length - 1];
-  console.log('called API', locations);
-  const latitude = closestLocation.latitude;
-  const longitude = closestLocation.longitude;
-  const country = closestLocation.country;
-  const name = closestLocation.name;
-  const weatherAPIUrl = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${latitude}&lon=${longitude}`;
-  const weatherRes = await fetch(weatherAPIUrl);
-  const weatherData = await weatherRes.json();
+  try {
+    let locationAPI = `${serverUrl}/location?q=${cityValue}`;
+    const res = await fetch(locationAPI);
+    const locations = await res.json();
+    if (!locations?.length) {
+      show.innerHTML = `<h3 class="error">City not found</h3>`;
+      return;
+    }
+    const closestLocation = locations[locations.length - 1];
+    console.log('called API', locations);
+    const latitude = closestLocation.latitude;
+    const longitude = closestLocation.longitude;
+    const country = closestLocation.country;
+    const name = closestLocation.name;
+    const weatherAPIUrl = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${latitude}&lon=${longitude}`;
+    const weatherRes = await fetch(weatherAPIUrl);
+    const weatherData = await weatherRes.json();
 
-  const timeSeries = weatherData.properties.timeseries;
-  const currentDetails = timeSeries[0].data.instant.details;
-  const nextHour = timeSeries[0].data.next_1_hours;
-  const weatherDataByDay = getWeatherDataByDay(timeSeries);
-  // console.log(timeSeries, weatherDataByDay);
+    const timeSeries = weatherData.properties.timeseries;
+    const currentDetails = timeSeries[0].data.instant.details;
+    const nextHour = timeSeries[0].data.next_1_hours;
+    const weatherDataByDay = getWeatherDataByDay(timeSeries);
+    // console.log(timeSeries, weatherDataByDay);
 
-  cityVal.value = '';
-  show.innerHTML = `
-        <h2>${name}, ${country}</h2>
+    cityVal.value = '';
+    show.innerHTML = `
+        <h2 style="text-align:center">${name}, ${country}</h2>
         <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center">
           <img src="./svg/${nextHour.summary.symbol_code}.svg" width=64 height=64/>
           <h1 style="white-space:nowrap; margin-left: 1.5rem;">${Math.round(currentDetails.air_temperature)}&#8451;</h1>
@@ -57,10 +58,10 @@ let getWeather = async (event) => {
  
         </div>
         `;
-  let tenDaysHtml = ``;
-  for (day of weatherDataByDay) {
-    const date = new Date(day.time);
-    tenDaysHtml += `
+    let tenDaysHtml = ``;
+    for (day of weatherDataByDay) {
+      const date = new Date(day.time);
+      tenDaysHtml += `
      <div style="display: flex; padding: 12px; border-bottom: 1px solid gray; align-items: center">
         <div style="flex: 1">
           <p>${daysOfWeek[date.getDay()]} ${date.getDate()} ${monthInYear[date.getMonth()]} </p>
@@ -77,9 +78,12 @@ let getWeather = async (event) => {
           <p>${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
         </div>
      </div>`;
+    }
+    tenDays.innerHTML = tenDaysHtml;
+    cityInfo.style.display = 'block';
+  } catch (error) {
+    show.innerHTML = `<h3 class="error">Error fetching data</h3>`;
   }
-  tenDays.innerHTML = tenDaysHtml;
-  cityInfo.style.display = 'block';
 };
 
 const getWeatherDataByDay = (timeseries) => {

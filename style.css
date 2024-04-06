@@ -66,7 +66,7 @@ body {
   margin-top: 3rem;
 }
 .search_box {
-  width: 100%;
+  width: 50%;
   background: rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
@@ -74,6 +74,13 @@ body {
   padding: 1rem 2rem;
   backdrop-filter: blur(0.4rem) saturate(180%);
   box-shadow: 0 1.8rem 3.7rem var(--box_shadow);
+  margin-top: 12px;
+}
+
+@media (max-width: 760px) {
+  .search_box {
+    width: 100%;
+  }
 }
 
 .search_box input {
