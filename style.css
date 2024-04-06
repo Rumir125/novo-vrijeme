@@ -81,9 +81,6 @@ body {
   .search_box {
     width: 100%;
   }
-  .result-box {
-    width: 100%;
-  }
 }
 
 .search_box input {
@@ -186,22 +183,24 @@ p {
   position: absolute;
   height: auto;
   display: flex;
-  box-shadow: 0 1.8rem 3.7rem var(--box_shadow);
   flex-direction: column;
   border-radius: 1.5rem;
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
+  background: #ffffff;
 }
 .result-box ul {
-  padding: 7px 5px;
+margin-top: 5px;
 }
 .result-box ul li {
   list-style: none;
   font-size: 1.5rem;
-  border-radius: 0.8rem;
+  border-radius: 0.7rem;
   padding: 14px;
   cursor: pointer;
 }
 .result-box ul li:hover {
   background: #7dade4;
 }
+@media (max-width: 760px) {
+  .result-box {
+    width: 100%;
+  }
