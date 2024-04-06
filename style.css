@@ -35,22 +35,21 @@ body {
 }
 .h1 {
   font-size: 3rem;
+  color: #0c9ee7;
   font-weight: 400;
-  font-family: "Poppins", sans-serif;
+  font-family: Helvetica sans-serif;
+  font-style: oblique;
   text-align: center;
   /* position: fixed; */
   /* top: 8%;
   left: 32.5%; */
   /* width: 35%; */
   height: auto;
-  background: var(--background);
-  backdrop-filter: blur(0.5rem);
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
   border-radius: 2rem;
-  box-shadow: 0 1.8rem 3.7rem var(--box_shadow);
 }
 .container {
   width: 90vw;
