@@ -1,11 +1,12 @@
 /* --------------- Weather Web App  --------------------- */
 let show = document.getElementById('show');
 let search = document.getElementById('search');
-let cityVal = document.getElementById('city');
+let locationInput = document.getElementById('city');
 let tenDays = document.getElementById('tenDays');
 const cityInfo = document.getElementById('cityInfo');
 const localBackendUrl = 'http://localhost:3000';
 const serverUrl = 'https://novovrijeme.com/api/v2';
+let searchedLocations = [];
 
 const daysOfWeek = { 0: 'Nedelja', 1: 'Ponedeljak', 2: 'Utorak', 3: 'Srijeda', 4: 'Četvrtak', 5: 'Petak', 6: 'Subota' };
 const monthInYear = ['Januar', 'Februar', 'Mart', 'April', 'Maj', 'Juni', 'Juli', 'August', 'Septembar', 'Oktobar', 'Novmbar', 'Decembar'];
@@ -14,9 +15,11 @@ let getWeather = async (event) => {
   event.preventDefault();
   let params = new URL(document.location.toString()).searchParams;
   let cityParam = params.get('city');
-  let cityValue = cityVal.value || cityParam;
+  let cityValue = locationInput.value || cityParam;
   if (!cityValue) {
     show.innerHTML = `<h3 class="error">Upišite ime grada</h3>`;
+    tenDays.innerHTML = '';
+    cityInfo.style.display = 'none';
     return;
   }
 
@@ -48,7 +51,7 @@ let getWeather = async (event) => {
     const weatherDataByDay = getWeatherDataByDay(timeSeries);
     // console.log(timeSeries, weatherDataByDay);
 
-    cityVal.value = '';
+    locationInput.value = '';
     show.innerHTML = `
         <h2 style="text-align:center">${name}, ${country}</h2>
         <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center">
@@ -129,3 +132,15 @@ const getWeatherDataByDay = (timeseries) => {
 
 search.addEventListener('click', getWeather);
 window.addEventListener('load', getWeather);
+let searchTimeout = null;
+locationInput.addEventListener('input', (event) => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(async () => {
+    const textVal = event.target.value;
+    let locationAPI = `${serverUrl}/location?q=${textVal}`;
+    const res = await fetch(locationAPI);
+    const locations = await res.json();
+    searchedLocations = locations;
+    console.log(searchedLocations);
+  }, 200);
+});
