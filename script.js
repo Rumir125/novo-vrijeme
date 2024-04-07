@@ -3,10 +3,16 @@ let show = document.getElementById('show');
 let search = document.getElementById('search');
 let locationInput = document.getElementById('city');
 let tenDays = document.getElementById('tenDays');
+const modal = document.getElementById('tempDetailsModal');
+const hourList = document.getElementById('hourList');
 const cityInfo = document.getElementById('cityInfo');
 const localBackendUrl = 'http://localhost:3000';
 const serverUrl = 'https://novovrijeme.com/api/v2';
+
 let searchedLocations = [];
+let isModalOpen = false;
+let currentDay = undefined;
+let completeWeatherData = [];
 
 const daysOfWeek = { 0: 'Nedelja', 1: 'Ponedeljak', 2: 'Utorak', 3: 'Srijeda', 4: 'Četvrtak', 5: 'Petak', 6: 'Subota' };
 const monthInYear = ['Januar', 'Februar', 'Mart', 'April', 'Maj', 'Juni', 'Juli', 'August', 'Septembar', 'Oktobar', 'Novmbar', 'Decembar'];
@@ -65,7 +71,7 @@ let getWeather = async (event) => {
     for (day of weatherDataByDay) {
       const date = new Date(day.time);
       tenDaysHtml += `
-     <div style="display: flex; padding: 12px; border-bottom: 1px solid gray; align-items: center">
+     <div onClick="return handleOpenModal(${date.getUTCDate()})" id=${date.getUTCDate()} class="dailyInfoContainer">
         <div style="flex: 1">
           <p>${daysOfWeek[date.getDay()]} ${date.getDate()} ${monthInYear[date.getMonth()]} </p>
         </div>
@@ -91,6 +97,7 @@ let getWeather = async (event) => {
 
 const getWeatherDataByDay = (timeseries) => {
   let tenDaysData = {};
+  completeWeatherData = timeseries;
   for (entry of timeseries) {
     const time = new Date(entry.time);
     const UTCHours = time.getUTCHours();
@@ -144,11 +151,48 @@ locationInput.addEventListener('input', (event) => {
   }, 200);
 });
 
-function showresultbox () {
-  document.getElementById('resultbox').style.display = 'block';
+function showResultBox() {
+  document.getElementById('resultBox').style.display = 'block';
 }
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (!event.target.matches('.input_box')) {
-    document.getElementById('resultbox').style.display = 'none';
+    document.getElementById('resultBox').style.display = 'none';
   }
+};
+
+window.onkeydown = function (event) {
+  if (isModalOpen && event.key === 'Escape') {
+    handleCloseModal();
+  }
+};
+
+function handleOpenModal(id) {
+  isModalOpen = true;
+  modal.style.display = 'block';
+  const weatherOfDay = completeWeatherData.filter((item) => new Date(item.time).getUTCDate() === id);
+  console.log(weatherOfDay);
+  for (day of weatherOfDay) {
+    const next6HoursSummary = day.data.next_6_hours?.summary;
+    const temperature = Math.round(day.data?.instant?.details?.air_temperature);
+    const hour = new Date(day.time).getUTCHours();
+    hourList.innerHTML += `<div  style="display: flex; padding: 4px; border-bottom: 1px solid gray; align-items: center">
+        <div style="flex: 1">
+          <p>${hour}:00</p>
+        </div>
+        <div style="flex:1">
+          <div style="display:flex; column-gap:8px; max-width:170px">
+            <img src="./svg/${next6HoursSummary.symbol_code}.svg" width=36 height=36>
+          </div>
+        </div>
+        <div style="flex: 1;">
+          <p>${temperature}&#8451</p>
+        </div>
+     </div>`;
+  }
+}
+
+function handleCloseModal() {
+  modal.style.display = 'none';
+  hourList.innerHTML = '';
+  isModalOpen = false;
 }

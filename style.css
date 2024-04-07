@@ -1,5 +1,5 @@
 /*-----------------  GOOGLE FONTS  -----------------*/
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600&display=swap');
 
 /*-----------------  VARIABLES  -----------------*/
 :root {
@@ -20,14 +20,15 @@ html {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 body {
   background: url(images/pozadinska_slika.webp);
   background-position: center;
   background-size: cover;
   width: 100%;
-  height: 1200px;
+  min-height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   /* justify-content: center; */
@@ -53,7 +54,7 @@ body {
   padding: 8px;
 }
 .container {
-  width: 50vw;
+  width: 70vw;
   height: auto;
   background: var(--background);
   backdrop-filter: blur(0.5rem);
@@ -78,7 +79,12 @@ body {
 }
 
 @media (max-width: 760px) {
-  .search_box, .result-box {
+  .search_box,
+  .result-box {
+    width: 100%;
+  }
+
+  .container {
     width: 100%;
   }
 }
@@ -172,22 +178,21 @@ body {
 
 p {
   font-size: 16px;
-
 }
 .input_box {
-    transition: background-color 5000000s ease-in-out 0s;
+  transition: background-color 5000000s ease-in-out 0s;
 }
 .result-box {
   width: 100%;
   top: 5.2rem;
   left: 0;
-  position:absolute;
-  flex-direction:column;
+  position: absolute;
+  flex-direction: column;
   border-radius: 1.5rem;
   background: #ffffff;
 }
 .result-box ul {
-margin-top: 0px;
+  margin-top: 0px;
 }
 .result-box ul li {
   list-style: none;
@@ -199,4 +204,42 @@ margin-top: 0px;
 }
 .result-box ul li:hover {
   background: #7dade4;
+}
+
+#tempDetailsModal {
+  display: none;
+  position: absolute;
+  min-width: 100vw;
+  min-height: 100vh;
+  /* height: 100%; */
+  /* This is temporary fix */
+  height: 1110px;
+  background-color: rgba(0, 0, 0, 0.25);
+  top: 0px;
+
+  .popup {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    top: 10%;
+    left: 10%;
+    border-radius: 8px;
+    padding: 12px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.dailyInfoContainer {
+  display: flex;
+  padding: 12px;
+  border-bottom: 1px solid gray;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: aliceblue;
+  }
 }
