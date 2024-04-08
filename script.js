@@ -16,9 +16,10 @@ let completeWeatherData = [];
 
 const daysOfWeek = { 0: 'Nedelja', 1: 'Ponedeljak', 2: 'Utorak', 3: 'Srijeda', 4: 'Četvrtak', 5: 'Petak', 6: 'Subota' };
 const monthInYear = ['Januar', 'Februar', 'Mart', 'April', 'Maj', 'Juni', 'Juli', 'August', 'Septembar', 'Oktobar', 'Novmbar', 'Decembar'];
+let selectedLocation = null;
 
 let getWeather = async (event) => {
-  event.preventDefault();
+  event?.preventDefault();
   let params = new URL(document.location.toString()).searchParams;
   let cityParam = params.get('city');
   let cityValue = locationInput.value || cityParam;
@@ -34,19 +35,28 @@ let getWeather = async (event) => {
   tenDays.innerHTML = '';
   cityInfo.style.display = 'none';
 
+  let latitude, longitude, country, name;
+
   try {
-    let locationAPI = `${serverUrl}/location?q=${cityValue}`;
-    const res = await fetch(locationAPI);
-    const locations = await res.json();
-    if (!locations?.length) {
-      show.innerHTML = `<h3 class="error">City not found</h3>`;
-      return;
+    if (event) {
+      let locationAPI = `${serverUrl}/location?q=${cityValue}`;
+      const res = await fetch(locationAPI);
+      const locations = await res.json();
+      if (!locations?.length) {
+        show.innerHTML = `<h3 class="error">City not found</h3>`;
+        return;
+      }
+      const closestLocation = locations[locations.length - 1];
+      latitude = closestLocation.latitude;
+      longitude = closestLocation.longitude;
+      country = closestLocation.country;
+      name = closestLocation.name;
+    } else {
+      latitude = selectedLocation.latitude;
+      longitude = selectedLocation.longitude;
+      country = selectedLocation.country;
+      name = selectedLocation.name;
     }
-    const closestLocation = locations[locations.length - 1];
-    const latitude = closestLocation.latitude;
-    const longitude = closestLocation.longitude;
-    const country = closestLocation.country;
-    const name = closestLocation.name;
     const weatherAPIUrl = `https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${latitude}&lon=${longitude}`;
     const weatherRes = await fetch(weatherAPIUrl);
     const weatherData = await weatherRes.json();
@@ -55,7 +65,6 @@ let getWeather = async (event) => {
     const currentDetails = timeSeries[0].data.instant.details;
     const nextHour = timeSeries[0].data.next_1_hours;
     const weatherDataByDay = getWeatherDataByDay(timeSeries);
-    // console.log(timeSeries, weatherDataByDay);
 
     locationInput.value = '';
     show.innerHTML = `
@@ -139,15 +148,29 @@ const getWeatherDataByDay = (timeseries) => {
 search.addEventListener('click', getWeather);
 window.addEventListener('load', getWeather);
 let searchTimeout = null;
+const cityList = document.getElementById('cities-list-wrapper');
+
 locationInput.addEventListener('input', (event) => {
   clearTimeout(searchTimeout);
   searchTimeout = setTimeout(async () => {
     const textVal = event.target.value;
-    let locationAPI = `${serverUrl}/location?q=${textVal}`;
-    const res = await fetch(locationAPI);
-    const locations = await res.json();
-    searchedLocations = locations;
-    console.log(searchedLocations);
+    try {
+      if (!event.target.value) {
+        cityList.innerHTML = '';
+        return;
+      }
+      let locationAPI = `${serverUrl}/location?q=${textVal}`;
+      const res = await fetch(locationAPI);
+      const locations = await res.json();
+      searchedLocations = locations;
+      console.log(searchedLocations);
+      cityList.innerHTML = '';
+      for (searchLocation of searchedLocations) {
+        cityList.innerHTML += `<li class="searchedLocation" id=${searchLocation.id}>${searchLocation.name}, ${searchLocation.region?.name || ''}, ${searchLocation.country}</li>`;
+      }
+    } catch (error) {
+      cityList.innerHTML = '<li>Error loading locations</li>';
+    }
   }, 200);
 });
 
@@ -156,6 +179,14 @@ function showResultBox() {
 }
 window.onclick = function (event) {
   if (!event.target.matches('.input_box')) {
+    if (event.target.classList?.[0] === 'searchedLocation') {
+      const locationSplits = event.target.textContent.split(',');
+      locationInput.value = `${locationSplits[0]}, ${locationSplits[2]}`;
+      selectedLocation = searchedLocations.find((item) => item.id === event.target.id) || searchedLocations?.[0];
+      console.log(selectedLocation);
+      getWeather();
+      cityList.innerHTML = '';
+    }
     document.getElementById('resultBox').style.display = 'none';
   }
 };
@@ -170,7 +201,6 @@ function handleOpenModal(id) {
   isModalOpen = true;
   modal.style.display = 'block';
   const weatherOfDay = completeWeatherData.filter((item) => new Date(item.time).getUTCDate() === id);
-  console.log(weatherOfDay);
   for (day of weatherOfDay) {
     const next6HoursSummary = day.data.next_6_hours?.summary;
     const temperature = Math.round(day.data?.instant?.details?.air_temperature);
