@@ -28,7 +28,7 @@ body {
   background-size: cover;
   width: 100%;
   min-height: 100vh;
-  height: 1120px;
+  height: 1200px;
   display: flex;
   align-items: center;
   /* justify-content: center; */
@@ -213,7 +213,7 @@ p {
   min-height: 100vh;
   /* height: 100%; */
   /* This is temporary fix */
-  height: 1120px;
+  height: 1200px;
   background-color: rgba(248, 246, 246, 0.25);
   top: 0px;
 }
