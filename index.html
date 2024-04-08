@@ -47,12 +47,7 @@
           onclick="showResultBox()" />
         <button id="search"><ion-icon class="icon" name="search"></ion-icon></button>
         <div class="result-box" style="display: none;" id="resultBox">
-          <ul>
-            <li>Sarajevo</li>
-            <li>Mostar</li>
-            <li>Zenica</li>
-            <li>Tuzla</li>
-            <li>Bihac</li>
+          <ul id="cities-list-wrapper">
           </ul>
         </div>
       </form>
@@ -79,7 +74,7 @@
     <div id="tempDetailsModal">
       <div class="popup">
         <div style="display: flex;justify-content: flex-end;margin-bottom: 10px;">
-          <span style="font-size: large;cursor: pointer;" onclick="handleCloseModal()">X</span>
+          <span style="font-size: xx-large;cursor: pointer;" onclick="handleCloseModal()">X</span>
         </div>
         <h3 style="text-align: center;font-size: large;margin-bottom: 12px;">Detaljna vremenska prognoza po satu</h3>
         <div style="overflow: auto;display: flex;flex-direction: column;">
@@ -93,4 +88,5 @@
     <!---------------  SCRIPT  --------------------->
     <script src="script.js"></script>
   </body>
+
 </html>
