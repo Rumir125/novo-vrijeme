@@ -86,7 +86,7 @@ let getWeather = async (event) => {
         <div style="flex: 1; color:#BF3131; margin-left: 5px;">
           <p>${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
         </div>
-        <div style="display:flex; column-gap:2px"><img class="iconRight" src="/svg/return-down-forward-sharp.svg" alt="arrow right"></div>
+        <div style="display:flex; column-gap:2px"><img class="iconRight" src="/svg/chevron-forward-sharp.svg" alt="arrow right"></div>
      </div>`;
     }
     tenDays.innerHTML = tenDaysHtml;
