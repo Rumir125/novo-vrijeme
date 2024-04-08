@@ -214,7 +214,7 @@ p {
   /* height: 100%; */
   /* This is temporary fix */
   height: 1110px;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(248, 246, 246, 0.25);
   top: 0px;
 }
   .popup {
@@ -234,13 +234,19 @@ p {
 
 .dailyInfoContainer {
   display: flex;
-  padding: 12px;
-  border-bottom: 1px solid gray;
+  padding: 15px;
+  border: 1px solid #4f5152;
   align-items: center;
   cursor: pointer;
-
+  border-radius: 7px;
 }
 
 .dailyInfoContainer:hover {
-  background-color: aliceblue;
+  background-color: #7dade4;
+}
+
+.iconRight {
+  width: 26px; 
+  height: 26px;
+  right:0px;
 }
