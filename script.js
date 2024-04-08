@@ -14,7 +14,7 @@ let isModalOpen = false;
 let currentDay = undefined;
 let completeWeatherData = [];
 
-const daysOfWeek = { 0: 'Nedelja', 1: 'Ponedeljak', 2: 'Utorak', 3: 'Srijeda', 4: 'Četvrtak', 5: 'Petak', 6: 'Subota' };
+const daysOfWeek = { 0: 'Ned', 1: 'Pon', 2: 'Uto', 3: 'Sri', 4: 'Čet', 5: 'Pet', 6: 'Sub' };
 const monthInYear = ['Januar', 'Februar', 'Mart', 'April', 'Maj', 'Juni', 'Juli', 'August', 'Septembar', 'Oktobar', 'Novmbar', 'Decembar'];
 let selectedLocation = null;
 
@@ -95,7 +95,7 @@ let getWeather = async (event) => {
         <div style="flex: 1; margin-left: 5px;">
           <p>${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
         </div>
-        <div style="display:flex; column-gap:2px"><img class="iconRight" src="svg/chevron-forward-sharp.svg" alt="arrow right"></div>
+        <div style="display:flex; flex:1; justify-content:flex-end"><img class="iconRight" src="svg/chevron-forward-sharp.svg" alt="arrow right"></div>
      </div>`;
     }
     tenDays.innerHTML = tenDaysHtml;
