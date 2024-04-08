@@ -201,18 +201,18 @@ window.onkeydown = function (event) {
 function handleOpenModal(id) {
   isModalOpen = true;
   modal.style.display = 'block';
-  const weatherOfDay = completeWeatherData.filter((item) => new Date(item.time).getUTCDate() === id);
+  const weatherOfDay = completeWeatherData.filter((item) => new Date(item.time).getDate() === id);
   for (day of weatherOfDay) {
-    const next6HoursSummary = day.data.next_6_hours?.summary;
+    const next1HoursSummary = day.data.next_1_hours?.summary || day.data.next_6_hours?.summary;
     const temperature = Math.round(day.data?.instant?.details?.air_temperature);
-    const hour = new Date(day.time).getUTCHours();
+    const hour = new Date(day.time).getHours();
     hourList.innerHTML += `<div  style="display: flex; padding: 4px; border-bottom: 1px solid gray; align-items: center">
         <div style="flex: 1">
           <p>${hour}:00</p>
         </div>
         <div style="flex:1">
           <div style="display:flex; column-gap:8px; max-width:170px">
-            <img src="./svg/${next6HoursSummary.symbol_code}.svg" width=36 height=36>
+            <img src="./svg/${next1HoursSummary.symbol_code}.svg" width=36 height=36>
           </div>
         </div>
         <div style="flex: 1; color:#BF3131; ">
@@ -220,7 +220,7 @@ function handleOpenModal(id) {
         </div>
      </div>`;
   }
-  window.scrollTo({ top: 0 });
+  window.scrollTo({ top: 250 });
 }
 
 function handleCloseModal() {
@@ -228,3 +228,9 @@ function handleCloseModal() {
   hourList.innerHTML = '';
   isModalOpen = false;
 }
+
+modal.onclick = function (event) {
+  if (!modal.children[0].contains(event.target)) {
+    handleCloseModal();
+  }
+};
