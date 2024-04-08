@@ -54,7 +54,7 @@ body {
   padding: 8px;
 }
 .container {
-  width: 70vw;
+  width: 50vw;
   height: auto;
   background: var(--background);
   backdrop-filter: blur(0.5rem);
