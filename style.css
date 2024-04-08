@@ -217,19 +217,27 @@ p {
   background-color: rgba(248, 246, 246, 0.25);
   top: 0px;
 }
+.popup {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background-color: white;
+  top: 10%;
+  left: 10%;
+  border-radius: 8px;
+  padding: 24px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 760px) { 
   .popup {
-    position: absolute;
-    width: 80%;
-    height: 80%;
-    background-color: white;
-    top: 10%;
-    left: 10%;
-    border-radius: 8px;
-    padding: 12px;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    left: 0;
   }
+
+}
 
 .dailyInfoContainer {
   display: flex;
@@ -249,7 +257,7 @@ p {
 }
 
 .iconRight {
-  width: 26px; 
+  width: 26px;
   height: 26px;
-  right:0px;
+  right: 0px;
 }
