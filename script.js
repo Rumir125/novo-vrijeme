@@ -220,6 +220,7 @@ function handleOpenModal(id) {
         </div>
      </div>`;
   }
+  window.scrollTo({ top: 0 });
 }
 
 function handleCloseModal() {
