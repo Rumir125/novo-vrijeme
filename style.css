@@ -219,11 +219,11 @@ p {
 }
 .popup {
   position: absolute;
-  width: 50%;
-  height: 40%;
+  width: 60%;
+  height: 50%;
   background-color: rgb(220, 218, 218);
-  top: 200px;
-  left: 25%;
+  top: 500px;
+  left: 20%;
   max-height: 800px;
   background-color: white;
   border-radius: 8px;
