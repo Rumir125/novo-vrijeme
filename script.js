@@ -92,9 +92,10 @@ let getWeather = async (event) => {
             ${day.quarterFour ? `<img src="./svg/${day.quarterFour}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
           </div>
         </div>
-        <div style="flex: 1;">
+        <div style="flex: 1; margin-left: 5px;">
           <p>${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
         </div>
+        <div style="display:flex; column-gap:2px"><img class="iconRight" src="svg/chevron-forward-sharp.svg" alt="arrow right"></div>
      </div>`;
     }
     tenDays.innerHTML = tenDaysHtml;
@@ -214,8 +215,8 @@ function handleOpenModal(id) {
             <img src="./svg/${next6HoursSummary.symbol_code}.svg" width=36 height=36>
           </div>
         </div>
-        <div style="flex: 1;">
-          <p>${temperature}&#8451</p>
+        <div style="flex: 1; color:#BF3131; ">
+          <p>${temperature}&#8451;</p>
         </div>
      </div>`;
   }
