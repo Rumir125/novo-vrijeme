@@ -80,7 +80,7 @@ let getWeather = async (event) => {
     for (day of weatherDataByDay) {
       const date = new Date(day.time);
       tenDaysHtml += `
-     <div onClick="return handleOpenModal(${date.getUTCDate()})" id=${date.getUTCDate()} class="dailyInfoContainer">
+     <div onClick="return handleOpenModal(${date.getDate()})" id=${date.getDate()} class="dailyInfoContainer">
         <div style="flex: 1">
           <p>${daysOfWeek[date.getDay()]} ${date.getDate()} ${monthInYear[date.getMonth()]} </p>
         </div>
@@ -110,8 +110,8 @@ const getWeatherDataByDay = (timeseries) => {
   completeWeatherData = timeseries;
   for (entry of timeseries) {
     const time = new Date(entry.time);
-    const UTCHours = time.getUTCHours();
-    const currentDate = time.getUTCDate();
+    const currentHours = time.getHours();
+    const currentDate = time.getDate();
     const next6Hours = entry.data.next_6_hours?.details;
     const next6HoursSummary = entry.data.next_6_hours?.summary;
 
@@ -119,21 +119,14 @@ const getWeatherDataByDay = (timeseries) => {
       tenDaysData[currentDate] = { ...entry, minTemp: next6Hours?.air_temperature_min, maxTemp: next6Hours?.air_temperature_max };
     }
 
-    switch (UTCHours) {
-      case 0:
-        tenDaysData[currentDate] = { ...entry, minTemp: next6Hours?.air_temperature_min, maxTemp: next6Hours?.air_temperature_max, quarterOne: next6HoursSummary?.symbol_code };
-        break;
-      case 6:
-        tenDaysData[currentDate]['quarterTwo'] = next6HoursSummary?.symbol_code;
-        break;
-      case 12:
-        tenDaysData[currentDate]['quarterThree'] = next6HoursSummary?.symbol_code;
-        break;
-      case 18:
-        tenDaysData[currentDate]['quarterFour'] = next6HoursSummary?.symbol_code;
-        break;
-      default:
-        break;
+    if (!tenDaysData[currentDate]['quarterOne'] && currentHours >= 0 && currentHours < 6) {
+      tenDaysData[currentDate] = { ...entry, minTemp: next6Hours?.air_temperature_min, maxTemp: next6Hours?.air_temperature_max, quarterOne: next6HoursSummary?.symbol_code };
+    } else if (!tenDaysData[currentDate]['quarterTwo'] && currentHours >= 6 && currentHours < 12) {
+      tenDaysData[currentDate]['quarterTwo'] = next6HoursSummary?.symbol_code;
+    } else if (!tenDaysData[currentDate]['quarterThree'] && currentHours >= 12 && currentHours < 18) {
+      tenDaysData[currentDate]['quarterThree'] = next6HoursSummary?.symbol_code;
+    } else if (!tenDaysData[currentDate]['quarterFour'] && currentHours >= 18 && currentHours <= 23) {
+      tenDaysData[currentDate]['quarterFour'] = next6HoursSummary?.symbol_code;
     }
 
     if (next6Hours?.air_temperature_min < tenDaysData[currentDate]?.minTemp) {
@@ -164,10 +157,12 @@ locationInput.addEventListener('input', (event) => {
       const res = await fetch(locationAPI);
       const locations = await res.json();
       searchedLocations = locations;
-      console.log(searchedLocations);
       cityList.innerHTML = '';
       for (searchLocation of searchedLocations) {
         cityList.innerHTML += `<li class="searchedLocation" id=${searchLocation.id}>${searchLocation.name}, ${searchLocation.region?.name || ''}, ${searchLocation.country}</li>`;
+      }
+      if (!searchedLocations.length) {
+        cityList.innerHTML = '<li>No results found</li>';
       }
     } catch (error) {
       cityList.innerHTML = '<li>Error loading locations</li>';
@@ -202,6 +197,9 @@ function handleOpenModal(id) {
   isModalOpen = true;
   modal.style.display = 'block';
   const weatherOfDay = completeWeatherData.filter((item) => new Date(item.time).getDate() === id);
+  const modalDate = document.getElementById('modal-date');
+  const currentDate = new Date(weatherOfDay[0].time);
+  modalDate.textContent = `${daysOfWeek[currentDate.getDay()]} ${currentDate.getDate()} ${monthInYear[currentDate.getMonth()]}`;
   for (day of weatherOfDay) {
     const next1HoursSummary = day.data.next_1_hours?.summary || day.data.next_6_hours?.summary;
     const temperature = Math.round(day.data?.instant?.details?.air_temperature);
@@ -220,7 +218,7 @@ function handleOpenModal(id) {
         </div>
      </div>`;
   }
-  window.scrollTo({ top: 250 });
+  window.scrollTo({ top: 150 });
 }
 
 function handleCloseModal() {
