@@ -199,13 +199,13 @@ p {
   top: 0px;
 }
 .popup {
-  position: absolute;
-  width: 55%;
-  height: 40%;
+  position: fixed;
+  width: 60vw;
+  height: auto;
   background-color: rgb(220, 218, 218);
-  top: 61%;
-  left: 22%;
-  max-height: 800px;
+  top: 50px;
+  left: 20vw;
+  max-height: 600px;
   background-color: white;
   border-radius: 8px;
   padding: 24px;

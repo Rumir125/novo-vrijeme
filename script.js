@@ -218,7 +218,7 @@ function handleOpenModal(id) {
         </div>
      </div>`;
   }
-  window.scrollTo({ top: window?.innerWidth < 760 ? 0 : 150 });
+  // window.scrollTo({ top: window?.innerWidth < 760 ? 0 : 150 });
 }
 
 function handleCloseModal() {
