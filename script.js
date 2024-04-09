@@ -210,7 +210,7 @@ function handleOpenModal(id) {
         </div>
         <div style="flex:1">
           <div style="display:flex; column-gap:8px; max-width:170px">
-            <img src="./svg/${next1HoursSummary.symbol_code}.svg" width=36 height=36>
+            ${next1HoursSummary?.symbol_code ? `<img src="./svg/${next1HoursSummary.symbol_code}.svg" alt="weather_icon" width=36 height=36>` : "<div style='width:36px;height:36px'></div>"}
           </div>
         </div>
         <div style="flex: 1; color:#BF3131; ">
@@ -218,7 +218,7 @@ function handleOpenModal(id) {
         </div>
      </div>`;
   }
-  window.scrollTo({ top: 150 });
+  window.scrollTo({ top: window?.innerWidth < 760 ? 0 : 150 });
 }
 
 function handleCloseModal() {
