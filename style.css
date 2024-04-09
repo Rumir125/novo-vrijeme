@@ -34,25 +34,7 @@ body {
   /* justify-content: center; */
   flex-direction: column;
 }
-.title {
-  font-size: 3.3rem;
-  color: #2f87c2;
-  font-weight: 600;
-  font-family: Helvetica sans-serif;
-  font-style: oblique;
-  text-align: center;
-  text-shadow: 1px 1px #000000;
-  /* position: fixed; */
-  /* top: 8%;
-  left: 32.5%; */
-  /* width: 35%; */
-  height: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  padding: 8px;
-}
+
 .container {
   width: 60vw;
   height: auto;
@@ -234,20 +216,18 @@ p {
   outline: 1px solid #5f5d5d;
   border-radius: 1.5rem;
 }
-  #modal-date {
-    text-align: center;
-    font-size: xx-large;
-    margin-bottom: 16px;
-  }
+#modal-date {
+  text-align: center;
+  font-size: xx-large;
+  margin-bottom: 16px;
+}
 
-
-@media (max-width: 760px) { 
+@media (max-width: 760px) {
   .popup {
     width: 100%;
     left: 0;
     top: 100px;
   }
-
 }
 
 .dailyInfoContainer {
@@ -268,7 +248,45 @@ p {
 }
 
 .iconRight {
-  width: 28px; 
+  width: 28px;
   height: 28px;
-  right:0;
+  right: 0;
+}
+
+.main-logo {
+  vertical-align: bottom;
+  width: 150px;
+  height: 150px;
+  max-width: 100%;
+}
+
+.title {
+  font-size: 3.3rem;
+  color: #2f87c2;
+  font-weight: 600;
+  font-family: Helvetica sans-serif;
+  font-style: oblique;
+  text-align: center;
+  text-shadow: 1px 1px #000000;
+  /* position: fixed; */
+  /* top: 8%;
+  left: 32.5%; */
+  /* width: 35%; */
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px;
+}
+
+@media (max-width: 760px) {
+  .main-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .title {
+    padding: 0px;
+  }
 }
