@@ -28,7 +28,7 @@ body {
   background-size: cover;
   width: 100%;
   min-height: 100vh;
-  height: 1200px;
+  height: 1400px;
   display: flex;
   align-items: center;
   /* justify-content: center; */
@@ -258,14 +258,14 @@ p {
   width: 150px;
   height: 150px;
   max-width: 100%;
+  border-bottom: 1.5px solid #2f87c2;
 }
 
 .title {
   font-size: 3.3rem;
   color: #2f87c2;
   font-weight: 600;
-  font-family: Helvetica sans-serif;
-  font-style: oblique;
+  font-family:'Times New Roman', Times, serif;
   text-align: center;
   text-shadow: 1px 1px #000000;
   /* position: fixed; */
@@ -296,7 +296,7 @@ p {
 }
 #slogan { 
   font-family: cursive;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   justify-content: center;
   font-weight: 600;
   display: flex;
