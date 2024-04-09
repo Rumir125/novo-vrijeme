@@ -78,7 +78,7 @@ let getWeather = async (event) => {
         `;
     let tenDaysHtml = ``;
     for (day of weatherDataByDay) {
-      const date = new Date(day.time);
+      const date = calculateLocalTime(day.time);
       tenDaysHtml += `
      <div onClick="return handleOpenModal(${date.getDate()})" id=${date.getDate()} class="dailyInfoContainer">
         <div style="flex: 1">
@@ -109,9 +109,9 @@ const getWeatherDataByDay = (timeseries) => {
   let tenDaysData = {};
   completeWeatherData = timeseries;
   for (entry of timeseries) {
-    const time = new Date(entry.time);
-    const currentHours = time.getHours();
-    const currentDate = time.getDate();
+    const localTime = calculateLocalTime(entry.time);
+    const currentHours = localTime.getHours();
+    const currentDate = localTime.getDate();
     const next6Hours = entry.data.next_6_hours?.details;
     const next6HoursSummary = entry.data.next_6_hours?.summary;
 
@@ -196,14 +196,15 @@ window.onkeydown = function (event) {
 function handleOpenModal(id) {
   isModalOpen = true;
   modal.style.display = 'block';
-  const weatherOfDay = completeWeatherData.filter((item) => new Date(item.time).getDate() === id);
+  const weatherOfDay = completeWeatherData.filter((item) => calculateLocalTime(item.time).getDate() === id);
   const modalDate = document.getElementById('modal-date');
   const currentDate = new Date(weatherOfDay[0].time);
   modalDate.textContent = `${daysOfWeek[currentDate.getDay()]} ${currentDate.getDate()} ${monthInYear[currentDate.getMonth()]}`;
   for (day of weatherOfDay) {
+    const localTime = calculateLocalTime(day.time);
     const next1HoursSummary = day.data.next_1_hours?.summary || day.data.next_6_hours?.summary;
     const temperature = Math.round(day.data?.instant?.details?.air_temperature);
-    const hour = new Date(day.time).getHours();
+    const hour = localTime.getHours();
     hourList.innerHTML += `<div  style="display: flex; padding: 4px; border-bottom: 1px solid gray; align-items: center">
         <div style="flex: 1">
           <p>${hour}:00</p>
@@ -231,4 +232,16 @@ modal.onclick = function (event) {
   if (!modal.children[0].contains(event.target)) {
     handleCloseModal();
   }
+};
+
+const calculateLocalTime = (time) => {
+  let localTime;
+  const date = new Date(time);
+  if (selectedLocation?.timeZone) {
+    const localeTimeString = date.toLocaleString('en-US', { timeZone: selectedLocation.timeZone });
+    localTime = new Date(localeTimeString);
+  } else {
+    localTime = date;
+  }
+  return localTime;
 };
