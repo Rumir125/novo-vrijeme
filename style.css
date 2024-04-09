@@ -28,7 +28,7 @@ body {
   background-size: cover;
   width: 100%;
   min-height: 100vh;
-  height: 1300px;
+  height: 1350px;
   display: flex;
   align-items: center;
   /* justify-content: center; */
@@ -296,7 +296,7 @@ p {
 }
 #slogan { 
   font-family: cursive;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   justify-content: center;
   font-weight: 600;
   display: flex;
