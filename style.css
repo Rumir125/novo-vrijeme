@@ -35,11 +35,10 @@ body {
   flex-direction: column;
 }
 .title {
-  font-size: 3.3rem;
+  font-size: 3rem;
   color: #2f87c2;
   font-weight: 600;
-  font-family: Helvetica sans-serif;
-  font-style: oblique;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
   text-shadow: 1px 1px #000000;
   /* position: fixed; */
@@ -52,6 +51,7 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 8px;
+  margin-top: 2.5rem;
 }
 .container {
   width: 60vw;
@@ -64,7 +64,7 @@ body {
   justify-content: center;
   border-radius: 3rem;
   box-shadow: 0 1.8rem 3.7rem var(--box_shadow);
-  margin-top: 3rem;
+  margin-top: 3.5rem;
 }
 .search_box {
   position: relative;
@@ -246,7 +246,6 @@ p {
     width: 100%;
     left: 0;
   }
-
 }
 
 .dailyInfoContainer {
@@ -275,3 +274,14 @@ p {
 #poSatima {
   font-size: 13px;
 }
+#slogan { 
+  font-family: cursive;
+  font-size: 1.7rem;
+  justify-content: center;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  
+}
+
