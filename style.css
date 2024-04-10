@@ -254,16 +254,14 @@ p {
   width: 150px;
   height: 150px;
   max-width: 100%;
-  border-bottom: 1.5px solid #2f87c2;
 }
 
 .title {
   font-size: 3.3rem;
-  color: #2f87c2;
+  color: #000000;
   font-weight: 600;
-  font-family:'Times New Roman', Times, serif;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: center;
-  text-shadow: 1px 1px #000000;
   /* position: fixed; */
   /* top: 8%;
   left: 32.5%; */
@@ -291,13 +289,14 @@ p {
   font-size: 13px;
 }
 #slogan { 
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.3rem;
   justify-content: center;
-  font-weight: 700;
+  font-weight: 300;
   display: flex;
   align-items: center;
-  flex-direction: column; 
+  flex-direction: column;
+  color: #4b4848ec;
   
 }
 
