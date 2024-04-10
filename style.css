@@ -295,10 +295,10 @@ p {
   font-size: 13px;
 }
 #slogan { 
-  font-family: cursive;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1.3rem;
   justify-content: center;
-  font-weight: 600;
+  font-weight: 700;
   display: flex;
   align-items: center;
   flex-direction: column; 
