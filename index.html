@@ -34,62 +34,69 @@
   </head>
 
   <body>
-    <header>
-      <div style="display: flex; justify-content: center">
-        <img alt="logo novo vrijeme" src="images/novilogo.webp" class="main-logo" />
+    <div style="width: 100vw;position: relative; min-height: 100vh;">
+      <div
+        style="position: absolute; top: 0;left: 0;width: 100vw; height: 100%; overflow: hidden; z-index: -1; display: flex; justify-content: center;">
+        <img height="1350" src="images/pozadinska_slika.webp" alt="">
       </div>
-      <h2 id="slogan">Korak ispred vremenskih prilika</h2>
-      <h1 class="title">Vrijeme danas, sutra i narednih 10 dana</h1>
-    </header>
-    <div class="container">
-      <form class="search_box" onsubmit=" return getWeather(event)">
-        <input class="input_box" autocomplete="off" id="city" placeholder="Upišite ime grada" type="text" value=""
-          onclick="showResultBox()" />
-        <button id="search"><ion-icon class="icon" name="search"></ion-icon></button>
-        <div class="result-box" style="display: none;" id="resultBox">
-          <ul id="cities-list-wrapper">
-          </ul>
+      <header>
+        <div style="display: flex; justify-content: center">
+          <img alt="logo novo vrijeme" src="images/novilogo.webp" class="main-logo" />
         </div>
-      </form>
-      <div id="show"></div>
-      <div id="cityInfo" style="width: 100%;display: none;">
-        <div style="display: flex; padding: 12px;border-bottom:  1px solid rgb(126, 125, 125); width: 100%">
-          <div style="flex: 1;"></div>
-          <div style="flex: 1; display: flex; column-gap: 8px; flex-wrap: nowrap; align-self:center;">
-            <p>3:00</p>
-            <p>9:00</p>
-            <p>15:00</p>
-            <p>21:00
-            <p></p>
-            </p>
+        <h2 id="slogan">Korak ispred vremenskih prilika</h2>
+        <h1 class="title">Vrijeme danas, sutra i narednih 10 dana</h1>
+      </header>
+      <div class="container">
+        <form class="search_box" onsubmit=" return getWeather(event)">
+          <input class="input_box" autocomplete="off" id="city" placeholder="Upišite ime grada" type="text" value=""
+            onclick="showResultBox()" />
+          <button id="search"><ion-icon class="icon" name="search"></ion-icon></button>
+          <div class="result-box" style="display: none;" id="resultBox">
+            <ul id="cities-list-wrapper">
+            </ul>
           </div>
-          <div style="flex: 1; flex-wrap: nowrap; align-self:center;">
-            <p>Min/Max</p>
-          </div>
-          <div style="display: flex;flex: 1; flex-wrap: nowrap; align-self:center; justify-content: end;">
-            <p id="poSatima">
-            <p></p> Po satima</p>
+        </form>
+        <div id="show"></div>
+        <div id="cityInfo" style="width: 100%;display: none;">
+          <div style="display: flex; padding: 12px;border-bottom:  1px solid rgb(126, 125, 125); width: 100%">
+            <div style="flex: 1;"></div>
+            <div style="flex: 1; display: flex; column-gap: 8px; flex-wrap: nowrap; align-self:center;">
+              <p>3:00</p>
+              <p>9:00</p>
+              <p>15:00</p>
+              <p>21:00
+              <p></p>
+              </p>
+            </div>
+            <div style="flex: 1; flex-wrap: nowrap; align-self:center;">
+              <p>Min/Max</p>
+            </div>
+            <div style="display: flex;flex: 1; flex-wrap: nowrap; align-self:center; justify-content: end;">
+              <p id="poSatima">
+              <p></p> Po satima</p>
+            </div>
           </div>
         </div>
+        <div id="tenDays" style="width: 100%"></div>
       </div>
-      <div id="tenDays" style="width: 100%"></div>
-    </div>
-    <div id="tempDetailsModal">
-      <div class="popup">
-        <div style="display: flex;justify-content: flex-end;">
-          <span style="font-size: xx-large;cursor: pointer;" onclick="handleCloseModal()">X</span>
-        </div>
-        <span id="modal-date">Datum</span>
-        <div style="overflow: auto;display: flex;flex-direction: column;">
-          <div id="hourList">
+      <div id="tempDetailsModal">
+        <div class="popup">
+          <div style="display: flex;justify-content: flex-end;">
+            <span style="font-size: xx-large;cursor: pointer;" onclick="handleCloseModal()">X</span>
+          </div>
+          <span id="modal-date">Datum</span>
+          <div style="overflow: auto;display: flex;flex-direction: column;">
+            <div id="hourList">
 
+            </div>
           </div>
         </div>
-      </div>
 
+      </div>
+      <!---------------  SCRIPT  --------------------->
     </div>
-    <!---------------  SCRIPT  --------------------->
     <script src="script.js"></script>
+
   </body>
 
 </html>
