@@ -5,6 +5,5 @@ deployment:
     - /bin/cp -R images $DEPLOYPATH
     - /bin/cp -R svg $DEPLOYPATH
     - /bin/cp -R index.html $DEPLOYPATH
-    - /bin/cp -R README.md $DEPLOYPATH
     - /bin/cp -R script.js $DEPLOYPATH
     - /bin/cp -R style.css $DEPLOYPATH
