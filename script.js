@@ -95,6 +95,9 @@ let getWeather = async (event) => {
         <div style="flex: 1; margin-left: 5px;">
           <p>${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
         </div>
+        <div style="flex: 1; margin-left: 5px;">
+          <p>${Math.round(day.precAmount)}mm</p>
+        </div>
         <div style="display:flex; flex:1; justify-content:flex-end"><img class="iconRight" src="svg/chevron-forward-sharp.svg" alt="arrow right"></div>
      </div>`;
     }
@@ -104,7 +107,6 @@ let getWeather = async (event) => {
     show.innerHTML = `<h3 class="error">Error fetching data</h3>`;
   }
 };
-
 const getWeatherDataByDay = (timeseries) => {
   let tenDaysData = {};
   completeWeatherData = timeseries;
@@ -116,11 +118,11 @@ const getWeatherDataByDay = (timeseries) => {
     const next6HoursSummary = entry.data.next_6_hours?.summary;
 
     if (!tenDaysData[currentDate]) {
-      tenDaysData[currentDate] = { ...entry, minTemp: next6Hours?.air_temperature_min, maxTemp: next6Hours?.air_temperature_max };
+      tenDaysData[currentDate] = { ...entry, minTemp: next6Hours?.air_temperature_min, maxTemp: next6Hours?.air_temperature_max, precAmount: next6Hours?.precipitation_amount };
     }
 
     if (!tenDaysData[currentDate]['quarterOne'] && currentHours >= 0 && currentHours < 6) {
-      tenDaysData[currentDate] = { ...entry, minTemp: next6Hours?.air_temperature_min, maxTemp: next6Hours?.air_temperature_max, quarterOne: next6HoursSummary?.symbol_code };
+      tenDaysData[currentDate] = { ...entry, minTemp: next6Hours?.air_temperature_min, maxTemp: next6Hours?.air_temperature_max, quarterOne: next6HoursSummary?.symbol_code, precAmount: next6Hours?.precipitation_amount };
     } else if (!tenDaysData[currentDate]['quarterTwo'] && currentHours >= 6 && currentHours < 12) {
       tenDaysData[currentDate]['quarterTwo'] = next6HoursSummary?.symbol_code;
     } else if (!tenDaysData[currentDate]['quarterThree'] && currentHours >= 12 && currentHours < 18) {
@@ -135,10 +137,11 @@ const getWeatherDataByDay = (timeseries) => {
     if (next6Hours?.air_temperature_max > tenDaysData[currentDate]?.maxTemp) {
       tenDaysData[currentDate].maxTemp = next6Hours?.air_temperature_max;
     }
+    if (next6Hours?.precipitation_amount > tenDaysData[currentDate]?.precAmount) {
+      tenDaysData[currentDate].precAmount = next6Hours?.precipitation_amount;}
   }
   return Object.values(tenDaysData).slice(0, 10);
 };
-
 search.addEventListener('click', getWeather);
 window.addEventListener('load', getWeather);
 let searchTimeout = null;
@@ -169,7 +172,6 @@ locationInput.addEventListener('input', (event) => {
     }
   }, 200);
 });
-
 function showResultBox() {
   document.getElementById('resultBox').style.display = 'block';
 }
