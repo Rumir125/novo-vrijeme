@@ -15,7 +15,7 @@ let currentDay = undefined;
 let completeWeatherData = [];
 
 const daysOfWeek = { 0: 'Ned', 1: 'Pon', 2: 'Uto', 3: 'Sri', 4: 'Čet', 5: 'Pet', 6: 'Sub' };
-const monthInYear = ['Januar', 'Februar', 'Mart', 'April', 'Maj', 'Juni', 'Juli', 'August', 'Septembar', 'Oktobar', 'Novmbar', 'Decembar'];
+const monthInYear = ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'];
 let selectedLocation = null;
 
 let getWeather = async (event) => {
@@ -81,8 +81,10 @@ let getWeather = async (event) => {
       const date = calculateLocalTime(day.time);
       tenDaysHtml += `
      <div onClick="return handleOpenModal(${date.getDate()})" id=${date.getDate()} class="dailyInfoContainer">
-        <div style="flex: 1">
-          <p>${daysOfWeek[date.getDay()]} ${date.getDate()} ${monthInYear[date.getMonth()]} </p>
+        <div style="flex: 1;min-width:75px">
+          <p style="white-space:nowrap">${daysOfWeek[date.getDay()]} ${date.getDate()} ${monthInYear[date.getMonth()]} </p>
+          <p class="temp_container_mob">${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
+          <p class="rain_container_mob">${Math.round(day.precAmount)}&#13221;</p>
         </div>
         <div style="flex:1">
           <div style="display:flex; column-gap:8px; max-width:170px">
@@ -92,10 +94,10 @@ let getWeather = async (event) => {
             ${day.quarterFour ? `<img src="./svg/${day.quarterFour}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
           </div>
         </div>
-        <div style="flex: 1; margin-left: 5px;">
+        <div class="temp_container">
           <p>${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
         </div>
-        <div style="flex: 1; margin-left: 5px;">
+        <div class="rain_container">
           <p>${Math.round(day.precAmount)}&#13221;</p>
         </div>
         <div style="display:flex; flex:1; justify-content:flex-end"><img class="iconRight" src="svg/chevron-forward-sharp.svg" alt="arrow right"></div>
@@ -122,7 +124,13 @@ const getWeatherDataByDay = (timeseries) => {
     }
 
     if (!tenDaysData[currentDate]['quarterOne'] && currentHours >= 0 && currentHours < 6) {
-      tenDaysData[currentDate] = { ...entry, minTemp: next6Hours?.air_temperature_min, maxTemp: next6Hours?.air_temperature_max, quarterOne: next6HoursSummary?.symbol_code, precAmount: next6Hours?.precipitation_amount };
+      tenDaysData[currentDate] = {
+        ...entry,
+        minTemp: next6Hours?.air_temperature_min,
+        maxTemp: next6Hours?.air_temperature_max,
+        quarterOne: next6HoursSummary?.symbol_code,
+        precAmount: next6Hours?.precipitation_amount,
+      };
     } else if (!tenDaysData[currentDate]['quarterTwo'] && currentHours >= 6 && currentHours < 12) {
       tenDaysData[currentDate]['quarterTwo'] = next6HoursSummary?.symbol_code;
     } else if (!tenDaysData[currentDate]['quarterThree'] && currentHours >= 12 && currentHours < 18) {
@@ -137,8 +145,9 @@ const getWeatherDataByDay = (timeseries) => {
     if (next6Hours?.air_temperature_max > tenDaysData[currentDate]?.maxTemp) {
       tenDaysData[currentDate].maxTemp = next6Hours?.air_temperature_max;
     }
-    if (next6Hours?.precipitation_amount > tenDaysData[currentDate]?.precAmount) {
-      tenDaysData[currentDate].precAmount = next6Hours?.precipitation_amount;}
+    if (next6Hours?.precipitation_amount) {
+      tenDaysData[currentDate].precAmount += next6Hours?.precipitation_amount;
+    }
   }
   return Object.values(tenDaysData).slice(0, 10);
 };
