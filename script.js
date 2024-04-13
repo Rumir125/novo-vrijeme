@@ -121,7 +121,7 @@ let getWeather = async (event) => {
           <p>${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
         </div>
         <div class="rain_container">
-          <p>${Math.round(day.precAmount)}&#13221;</p>
+          <p>${Math.round(day.precAmount)} mm</p>
         </div>
         <div style="display:flex; flex:1; justify-content:flex-end"><img class="iconRight" src="svg/chevron-forward-sharp.svg" alt="arrow right"></div>
      </div>`;
