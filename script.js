@@ -107,7 +107,7 @@ let getWeather = async (event) => {
         <div style="flex: 1;min-width:75px">
           <p style="white-space:nowrap">${daysOfWeek[date.getDay()]} ${date.getDate()} ${monthInYear[date.getMonth()]} </p>
           <p class="temp_container_mob">${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
-          <p class="rain_container_mob">${Math.round(day.precAmount)}&#13221;</p>
+          <p class="rain_container_mob">${Math.round(day.precAmount)} mm;</p>
         </div>
         <div style="flex:1">
           <div style="display:flex; column-gap:8px; max-width:170px">
