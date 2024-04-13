@@ -33,7 +33,7 @@ let getWeather = async (event) => {
   if (!cityValue) {
     // show.innerHTML = `<h3 class="error">Upišite ime grada</h3>`;
     ipLocation = await getIpAddressLocation();
-    if (!ipLocation) {
+    if (!ipLocation?.latitude) {
       show.innerHTML = '';
       tenDays.innerHTML = '';
       cityInfo.style.display = 'none';
