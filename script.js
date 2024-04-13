@@ -34,7 +34,7 @@ let getWeather = async (event) => {
     // show.innerHTML = `<h3 class="error">Upišite ime grada</h3>`;
     ipLocation = await getIpAddressLocation();
     if (!ipLocation?.latitude) {
-      show.innerHTML = '<h3 class="error">GeoLocation not available</h3>';
+      show.innerHTML = `<h3 class="error">GeoLocation not available ${ipLocation?.err}</h3>`;
       tenDays.innerHTML = '';
       cityInfo.style.display = 'none';
       return;
@@ -297,14 +297,16 @@ const getGeoLocation = () => {
 
 // This location from IP Address server
 const getIpAddressLocation = async () => {
+  let err;
   try {
     const res = await fetch('https://geolocation-db.com/json/');
     const data = await res.json();
     return data;
   } catch (error) {
     console.log(error);
+    err = error;
   }
-  return {};
+  return { err };
 };
 
 search.addEventListener('click', getWeather);
