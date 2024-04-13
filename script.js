@@ -23,19 +23,30 @@ let getWeather = async (event) => {
   let params = new URL(document.location.toString()).searchParams;
   let cityParam = params.get('city');
   let cityValue = locationInput.value || cityParam;
-  if (!cityValue) {
-    // show.innerHTML = `<h3 class="error">Upišite ime grada</h3>`;
-    show.innerHTML = '';
-    tenDays.innerHTML = '';
-    cityInfo.style.display = 'none';
-    return;
-  }
+  let latitude, longitude, country, name;
+  let ipLocation;
 
   show.innerHTML = `<h3 class="error">Učitavanje podataka u toku...</h3>`;
   tenDays.innerHTML = '';
   cityInfo.style.display = 'none';
 
-  let latitude, longitude, country, name;
+  if (!cityValue) {
+    // show.innerHTML = `<h3 class="error">Upišite ime grada</h3>`;
+    ipLocation = await getIpAddressLocation();
+    if (!ipLocation) {
+      show.innerHTML = '';
+      tenDays.innerHTML = '';
+      cityInfo.style.display = 'none';
+      return;
+    }
+    latitude = ipLocation.latitude;
+    longitude = ipLocation.longitude;
+    country = ipLocation.country_name;
+    name = ipLocation.city;
+    cityValue = ipLocation.city;
+  } else {
+    ipLocation = null;
+  }
 
   try {
     if (event) {
@@ -68,7 +79,9 @@ let getWeather = async (event) => {
 
     locationInput.value = '';
     show.innerHTML = `
-        <h2 style="text-align:center">${name}, ${country}</h2>
+        <h2 style="text-align:center">
+         ${ipLocation ? '<img height=24 width=24 src="svg/location-pin.svg"/>' : ''} ${name}, ${country} ${ipLocation ? '(IP Location)' : ''}
+        </h2>
         <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center">
           <img src="./svg/${nextHour.summary.symbol_code}.svg" width=64 height=64/>
           <h1 style="white-space:nowrap; margin-left: 1.5rem;">${Math.round(currentDetails.air_temperature)}&#8451;</h1>
@@ -151,8 +164,6 @@ const getWeatherDataByDay = (timeseries) => {
   }
   return Object.values(tenDaysData).slice(0, 10);
 };
-search.addEventListener('click', getWeather);
-window.addEventListener('load', getWeather);
 let searchTimeout = null;
 const cityList = document.getElementById('cities-list-wrapper');
 
@@ -256,3 +267,41 @@ const calculateLocalTime = (time) => {
   }
   return localTime;
 };
+
+// This is GPS location
+const getGeoLocation = () => {
+  // Check if geolocation is supported by the browser
+  if ('geolocation' in navigator) {
+    // Prompt user for permission to access their location
+    navigator.geolocation.getCurrentPosition(
+      // Success callback function
+      (position) => {
+        // Get the user's latitude and longitude coordinates
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        // Do something with the location data, e.g. display on a map
+        console.log(`Latitude: ${lat}, longitude: ${lng}`);
+      },
+      // Error callback function
+      (error) => {
+        // Handle errors, e.g. user denied location sharing permissions
+        console.error('Error getting user location:', error);
+      }
+    );
+  } else {
+    // Geolocation is not supported by the browser
+    console.error('Geolocation is not supported by this browser.');
+  }
+};
+
+// This location from IP Address server
+const getIpAddressLocation = async () => {
+  const res = await fetch('https://geolocation-db.com/json/');
+  const data = await res.json();
+  console.log(data);
+  return data;
+};
+
+search.addEventListener('click', getWeather);
+window.addEventListener('load', getWeather);

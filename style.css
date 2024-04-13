@@ -355,3 +355,8 @@ p {
   height: 1550px;
 }
 }
+
+#tenDays div:last-child {
+  border-bottom-left-radius:  3rem;
+  border-bottom-right-radius:  3rem;
+}
