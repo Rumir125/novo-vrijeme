@@ -297,10 +297,15 @@ const getGeoLocation = () => {
 
 // This location from IP Address server
 const getIpAddressLocation = async () => {
-  const res = await fetch('https://geolocation-db.com/json/');
-  const data = await res.json();
-  console.log(data);
-  return data;
+  try {
+    const res = await fetch('https://geolocation-db.com/json/');
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+  return {};
 };
 
 search.addEventListener('click', getWeather);
