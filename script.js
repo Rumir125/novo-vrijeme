@@ -31,25 +31,35 @@ let getWeather = async (event) => {
   cityInfo.style.display = 'none';
 
   if (!cityValue) {
-    // show.innerHTML = `<h3 class="error">Upišite ime grada</h3>`;
-    ipLocation = await getIpAddressLocation();
-    if (!ipLocation?.latitude) {
-      show.innerHTML = `<h3 class="error">GeoLocation not available for this browser</h3>`;
-      tenDays.innerHTML = '';
-      cityInfo.style.display = 'none';
-      return;
+    const navigatorLocation = await getGeoLocation();
+    if (navigatorLocation?.latitude) {
+      latitude = navigatorLocation.latitude;
+      selectedLocation = {
+        latitude: navigatorLocation.latitude,
+        longitude: navigatorLocation.longitude,
+        country: '',
+        name: `${Math.round((navigatorLocation.latitude + Number.EPSILON) * 10000) / 10000}, ${Math.round((navigatorLocation.longitude + Number.EPSILON) * 10000) / 10000}`,
+      };
+    } else {
+      ipLocation = await getIpAddressLocation();
+      if (!ipLocation?.latitude) {
+        show.innerHTML = `<h3 class="error">GeoLocation not available for this browser</h3>`;
+        tenDays.innerHTML = '';
+        cityInfo.style.display = 'none';
+        return;
+      }
+      latitude = ipLocation.latitude;
+      longitude = ipLocation.longitude;
+      country = ipLocation.country_name;
+      name = ipLocation.city;
+      cityValue = ipLocation.city;
     }
-    latitude = ipLocation.latitude;
-    longitude = ipLocation.longitude;
-    country = ipLocation.country_name;
-    name = ipLocation.city;
-    cityValue = ipLocation.city;
   } else {
     ipLocation = null;
   }
 
   try {
-    if (event) {
+    if (event && cityValue) {
       let locationAPI = `${serverUrl}/location?q=${cityValue}`;
       const res = await fetch(locationAPI);
       const locations = await res.json();
@@ -80,7 +90,7 @@ let getWeather = async (event) => {
     locationInput.value = '';
     show.innerHTML = `
         <h2 style="text-align:center">
-         ${ipLocation ? '<img height=24 width=24 src="svg/location-pin.svg"/>' : ''} ${name}, ${country} ${ipLocation ? '(IP Location)' : ''}
+         ${ipLocation ? '<img height=24 width=24 src="svg/location-pin.svg"/>' : ''} ${name}${country ? `, ${country}` : ''} ${ipLocation ? '(IP Location)' : ''}
         </h2>
         <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center">
           <img src="./svg/${nextHour.summary.symbol_code}.svg" width=64 height=64/>
@@ -269,26 +279,34 @@ const calculateLocalTime = (time) => {
 };
 
 // This is GPS location
-const getGeoLocation = () => {
+const getGeoLocation = async () => {
   // Check if geolocation is supported by the browser
   if ('geolocation' in navigator) {
     // Prompt user for permission to access their location
-    navigator.geolocation.getCurrentPosition(
-      // Success callback function
-      (position) => {
-        // Get the user's latitude and longitude coordinates
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
+    try {
+      const result = await new Promise((resolve, reject) =>
+        navigator.geolocation.getCurrentPosition(
+          // Success callback function
+          (position) => {
+            // Get the user's latitude and longitude coordinates
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
 
-        // Do something with the location data, e.g. display on a map
-        console.log(`Latitude: ${lat}, longitude: ${lng}`);
-      },
-      // Error callback function
-      (error) => {
-        // Handle errors, e.g. user denied location sharing permissions
-        console.error('Error getting user location:', error);
-      }
-    );
+            resolve({ latitude: lat, longitude: lng });
+          },
+          // Error callback function
+          (error) => {
+            // Handle errors, e.g. user denied location sharing permissions
+            console.error('Error getting user location:', error);
+            reject(error);
+          },
+          (error) => reject(error)
+        )
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
   } else {
     // Geolocation is not supported by the browser
     console.error('Geolocation is not supported by this browser.');
