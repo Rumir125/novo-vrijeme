@@ -154,7 +154,8 @@ body {
 
 .temp_container_mob {
   display: none;
-  color:#8f2929
+  color:#8f2929;
+  white-space: nowrap;
 }
 
 .rain_container {
@@ -168,7 +169,8 @@ body {
 
 .rain_container_mob {
   display: none;
-  color:rgb(8, 84, 224)
+  color:rgb(8, 84, 224);
+  white-space: nowrap;
 }
 
 @media (max-width: 760px) {

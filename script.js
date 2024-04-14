@@ -141,6 +141,7 @@ const getWeatherDataByDay = (timeseries) => {
     const currentDate = localTime.getDate();
     const next6Hours = entry.data.next_6_hours?.details;
     const next6HoursSummary = entry.data.next_6_hours?.summary;
+    const nextHours = entry.data.next_1_hours?.details || entry.data.next_6_hours?.details;
 
     if (!tenDaysData[currentDate]) {
       tenDaysData[currentDate] = { ...entry, minTemp: next6Hours?.air_temperature_min, maxTemp: next6Hours?.air_temperature_max, precAmount: next6Hours?.precipitation_amount };
@@ -152,7 +153,7 @@ const getWeatherDataByDay = (timeseries) => {
         minTemp: next6Hours?.air_temperature_min,
         maxTemp: next6Hours?.air_temperature_max,
         quarterOne: next6HoursSummary?.symbol_code,
-        precAmount: next6Hours?.precipitation_amount,
+        precAmount: 0,
       };
     } else if (!tenDaysData[currentDate]['quarterTwo'] && currentHours >= 6 && currentHours < 12) {
       tenDaysData[currentDate]['quarterTwo'] = next6HoursSummary?.symbol_code;
@@ -168,8 +169,8 @@ const getWeatherDataByDay = (timeseries) => {
     if (next6Hours?.air_temperature_max > tenDaysData[currentDate]?.maxTemp) {
       tenDaysData[currentDate].maxTemp = next6Hours?.air_temperature_max;
     }
-    if (next6Hours?.precipitation_amount) {
-      tenDaysData[currentDate].precAmount += next6Hours?.precipitation_amount;
+    if (nextHours?.precipitation_amount) {
+      tenDaysData[currentDate].precAmount += nextHours?.precipitation_amount;
     }
   }
   return Object.values(tenDaysData).slice(0, 10);
