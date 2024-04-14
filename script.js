@@ -283,26 +283,28 @@ const getGeoLocation = async () => {
   // Check if geolocation is supported by the browser
   if ('geolocation' in navigator) {
     // Prompt user for permission to access their location
+    const locationPromise = new Promise((resolve, reject) =>
+      navigator.geolocation.getCurrentPosition(
+        // Success callback function
+        (position) => {
+          // Get the user's latitude and longitude coordinates
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          resolve({ latitude: lat, longitude: lng });
+        },
+        // Error callback function
+        (error) => {
+          // Handle errors, e.g. user denied location sharing permissions
+          console.error('Error getting user location:', error);
+          reject(error);
+        },
+        {
+          timeout: 500,
+        }
+      )
+    );
     try {
-      const result = await new Promise((resolve, reject) =>
-        navigator.geolocation.getCurrentPosition(
-          // Success callback function
-          (position) => {
-            // Get the user's latitude and longitude coordinates
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-
-            resolve({ latitude: lat, longitude: lng });
-          },
-          // Error callback function
-          (error) => {
-            // Handle errors, e.g. user denied location sharing permissions
-            console.error('Error getting user location:', error);
-            reject(error);
-          },
-          (error) => reject(error)
-        )
-      );
+      const result = await locationPromise;
       return result;
     } catch (error) {
       console.log(error);
