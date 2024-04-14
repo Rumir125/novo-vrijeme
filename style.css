@@ -143,6 +143,7 @@ body {
 .temp_container {
   flex: 1;
   margin-left: 5px;
+  color:#8f2929
 }
 
 .temp_container_title {
@@ -167,6 +168,7 @@ body {
 
 .rain_container_mob {
   display: none;
+  color:rgb(8, 84, 224)
 }
 
 @media (max-width: 760px) {
