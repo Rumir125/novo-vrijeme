@@ -143,7 +143,7 @@ body {
 .temp_container {
   flex: 1;
   margin-left: 5px;
-  color:#8f2929
+  color: #8f2929;
 }
 
 .temp_container_title {
@@ -154,7 +154,7 @@ body {
 
 .temp_container_mob {
   display: none;
-  color:#8f2929;
+  color: #8f2929;
   white-space: nowrap;
 }
 
@@ -164,12 +164,14 @@ body {
 }
 
 .rain_container_title {
-  flex: 1; flex-wrap: nowrap; align-self:center;
+  flex: 1;
+  flex-wrap: nowrap;
+  align-self: center;
 }
 
 .rain_container_mob {
   display: none;
-  color:rgb(8, 84, 224);
+  color: rgb(8, 84, 224);
   white-space: nowrap;
 }
 
@@ -357,12 +359,35 @@ p {
 }
 
 @media (max-width: 760px) {
-.main-img {
-  height: 1550px;
-}
+  .main-img {
+    height: 1550px;
+  }
 }
 
 #tenDays div:last-child {
-  border-bottom-left-radius:  3rem;
-  border-bottom-right-radius:  3rem;
+  border-bottom-left-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+}
+
+.times_container {
+  flex: 1;
+  display: flex;
+  column-gap: 8px;
+  flex-wrap: nowrap;
+  align-self: center;
+}
+
+.icons_container {
+  display: flex;
+  column-gap: 8px;
+  max-width: 170px;
+}
+
+@media (max-width: 760px) {
+  .times_container {
+    column-gap: 4px;
+  }
+  .icons_container {
+    column-gap: 4px;
+  }
 }
