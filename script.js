@@ -106,7 +106,7 @@ let getWeather = async (event) => {
      <div onClick="return handleOpenModal(${date.getDate()})" id=${date.getDate()} class="dailyInfoContainer">
         <div style="flex: 1;min-width:75px">
           <p style="white-space:nowrap">${daysOfWeek[date.getDay()]} ${date.getDate()} ${monthInYear[date.getMonth()]} </p>
-          <p class="temp_container_mob">${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
+          <p class="temp_container_mob">${Math.round(day.minTemp)}&#8451 / ${Math.round(day.maxTemp)}&#8451;</p>
           <p class="rain_container_mob">Kiša: ${Math.round(day.precAmount)} mm</p>
         </div>
         <div style="flex:1">
@@ -118,7 +118,7 @@ let getWeather = async (event) => {
           </div>
         </div>
         <div class="temp_container">
-          <p>${Math.round(day.minTemp)}&#8451/${Math.round(day.maxTemp)}&#8451;</p>
+          <p>${Math.round(day.minTemp)}&#8451 / ${Math.round(day.maxTemp)}&#8451;</p>
         </div>
         <div class="rain_container">
           <p>${Math.round(day.precAmount)} mm</p>
