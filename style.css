@@ -9,6 +9,7 @@
   --border: rgba(255, 255, 255, 0.25);
   --background: rgba(255, 255, 255, 0.1);
   --box_shadow: rgba(3, 46, 87, 0.3);
+  --rain-color : rgb(8, 84, 224);
 }
 
 html {
@@ -171,7 +172,7 @@ body {
 
 .rain_container_mob {
   display: none;
-  color: rgb(8, 84, 224);
+  color: var(--rain-color);
   white-space: nowrap;
 }
 
@@ -390,4 +391,9 @@ p {
   .icons_container {
     column-gap: 4px;
   }
+}
+
+.precipitation_amount_container {
+  flex: 1;
+  color: var(--rain-color);
 }

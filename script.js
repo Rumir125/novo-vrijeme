@@ -236,6 +236,7 @@ function handleOpenModal(id) {
   for (day of weatherOfDay) {
     const localTime = calculateLocalTime(day.time);
     const next1HoursSummary = day.data.next_1_hours?.summary || day.data.next_6_hours?.summary;
+    const nextHoursDetails = day.data.next_1_hours?.details || day.data.next_6_hours?.details;
     const temperature = Math.round(day.data?.instant?.details?.air_temperature);
     const hour = localTime.getHours();
     hourList.innerHTML += `<div  style="display: flex; padding: 4px; border-bottom: 1px solid gray; align-items: center">
@@ -249,6 +250,9 @@ function handleOpenModal(id) {
         </div>
         <div style="flex: 1; color:#BF3131; ">
           <p>${temperature}&#8451;</p>
+        </div>
+        <div class="precipitation_amount_container">
+          ${nextHoursDetails.precipitation_amount ? `<p>${nextHoursDetails.precipitation_amount}mm</p>` : ''}
         </div>
      </div>`;
   }
