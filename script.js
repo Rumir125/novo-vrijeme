@@ -101,13 +101,14 @@ let getWeather = async (event) => {
         `;
     let tenDaysHtml = ``;
     for (day of weatherDataByDay) {
+      const hasPrecipitation = day.precAmount.toFixed(1) > 0;
       const date = calculateLocalTime(day.time);
       tenDaysHtml += `
      <div onClick="return handleOpenModal(${date.getDate()})" id=${date.getDate()} class="dailyInfoContainer">
         <div style="flex: 1;min-width:80px">
           <p style="white-space:nowrap">${daysOfWeek[date.getDay()]} ${date.getDate()} ${monthInYear[date.getMonth()]} </p>
           <p class="temp_container_mob">${Math.round(day.minTemp)}&#8451 / ${Math.round(day.maxTemp)}&#8451;</p>
-          <p class="rain_container_mob">Kiša: ${Math.round(day.precAmount)} mm</p>
+          <p class="rain_container_mob">${hasPrecipitation ? `${day.precAmount.toFixed(1)}mm` : ''}</p>
         </div>
         <div style="flex:1">
           <div class="icons_container">
