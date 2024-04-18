@@ -8,3 +8,4 @@ deployment:
     - /bin/cp -R README.md $DEPLOYPATH
     - /bin/cp -R script.js $DEPLOYPATH
     - /bin/cp -R style.css $DEPLOYPATH
+    - /bin/cp -R gradovi $DEPLOYPATH
