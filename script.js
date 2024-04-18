@@ -18,11 +18,26 @@ const daysOfWeek = { 0: 'Ned', 1: 'Pon', 2: 'Uto', 3: 'Sri', 4: 'Čet', 5: 'Pet'
 const monthInYear = ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'];
 let selectedLocation = null;
 
+const currentUrl = new URL(document.location.toString());
+let cityFromUrl = '';
+let svgPath = './';
+if (currentUrl.pathname.includes('/gradovi/')) {
+  svgPath = '../../../../';
+  const regex = /gradovi\/[^/]+\/([^/]+)\//;
+  const match = currentUrl.pathname.match(regex);
+
+  if (match) {
+    const extractedString = match[1];
+    console.log(extractedString); // Output: bh
+    cityFromUrl = extractedString;
+  } else {
+    console.log('No match found.');
+  }
+}
+
 let getWeather = async (event) => {
   event?.preventDefault();
-  let params = new URL(document.location.toString()).searchParams;
-  let cityParam = params.get('city');
-  let cityValue = locationInput.value || cityParam;
+  let cityValue = locationInput.value || cityFromUrl;
   let latitude, longitude, country, name;
   let ipLocation;
 
@@ -90,10 +105,10 @@ let getWeather = async (event) => {
     locationInput.value = '';
     show.innerHTML = `
         <h2 style="text-align:center">
-         ${ipLocation ? '<img height=24 width=24 src="svg/location-pin.svg"/>' : ''} ${name}${country ? `, ${country}` : ''} ${ipLocation ? '(IP Location)' : ''}
+         ${ipLocation ? `<img height=24 width=24 src="${svgPath}svg/location-pin.svg"/>` : ''} ${name}${country ? `, ${country}` : ''} ${ipLocation ? '(IP Location)' : ''}
         </h2>
         <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center">
-          <img src="./svg/${nextHour.summary.symbol_code}.svg" width=64 height=64/>
+          <img src="${svgPath}svg/${nextHour.summary.symbol_code}.svg" width=64 height=64/>
           <h1 style="white-space:nowrap; margin-left: 1.5rem;">${Math.round(currentDetails.air_temperature)}&#8451;</h1>
            </div>
  
@@ -112,10 +127,10 @@ let getWeather = async (event) => {
         </div>
         <div style="flex:1">
           <div class="icons_container">
-            ${day.quarterOne ? `<img src="./svg/${day.quarterOne}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
-            ${day.quarterTwo ? `<img src="./svg/${day.quarterTwo}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
-            ${day.quarterThree ? `<img src="./svg/${day.quarterThree}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
-            ${day.quarterFour ? `<img src="./svg/${day.quarterFour}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
+            ${day.quarterOne ? `<img src="${svgPath}svg/${day.quarterOne}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
+            ${day.quarterTwo ? `<img src="${svgPath}svg/${day.quarterTwo}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
+            ${day.quarterThree ? `<img src="${svgPath}svg/${day.quarterThree}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
+            ${day.quarterFour ? `<img src="${svgPath}svg/${day.quarterFour}.svg" width=36 height=36>` : '<div style="width:36px";height:36px ></div>'}
           </div>
         </div>
         <div class="temp_container">
@@ -124,7 +139,7 @@ let getWeather = async (event) => {
         <div class="rain_container">
           <p>${Math.round(day.precAmount)} mm</p>
         </div>
-        <div style="display:flex; flex:1; justify-content:flex-end"><img class="iconRight" src="svg/chevron-forward-sharp.svg" alt="arrow right"></div>
+        <div style="display:flex; flex:1; justify-content:flex-end"><img class="iconRight" src="${svgPath}svg/chevron-forward-sharp.svg" alt="arrow right"></div>
      </div>`;
     }
     tenDays.innerHTML = tenDaysHtml;
@@ -246,7 +261,7 @@ function handleOpenModal(id) {
         </div>
         <div style="flex:1">
           <div style="display:flex; column-gap:8px; max-width:170px">
-            ${next1HoursSummary?.symbol_code ? `<img src="./svg/${next1HoursSummary.symbol_code}.svg" alt="weather_icon" width=36 height=36>` : "<div style='width:36px;height:36px'></div>"}
+            ${next1HoursSummary?.symbol_code ? `<img src="${svgPath}svg/${next1HoursSummary.symbol_code}.svg" alt="weather_icon" width=36 height=36>` : "<div style='width:36px;height:36px'></div>"}
           </div>
         </div>
         <div style="flex: 1; color:#BF3131; ">
