@@ -21,6 +21,14 @@ let selectedLocation = null;
 const currentUrl = new URL(document.location.toString());
 let cityFromUrl = '';
 let svgPath = './';
+let openModalForTodayInitially = false;
+let openModalForTomorrowInitially = false;
+if (currentUrl.pathname.includes('/danas')) {
+  openModalForTodayInitially = true;
+} else if (currentUrl.pathname.includes('/sutra')) {
+  openModalForTomorrowInitially = true;
+}
+
 if (currentUrl.pathname.includes('/gradovi/')) {
   svgPath = '../../../../';
   const regex = /gradovi\/[^/]+\/([^/]+)\//;
@@ -144,6 +152,13 @@ let getWeather = async (event) => {
     }
     tenDays.innerHTML = tenDaysHtml;
     cityInfo.style.display = 'block';
+    if (openModalForTodayInitially) {
+      handleOpenModal(calculateLocalTime(new Date()).getDate());
+      openModalForTodayInitially = false;
+    } else if (openModalForTomorrowInitially) {
+      handleOpenModal(calculateLocalTime(new Date()).getDate() + 1);
+      openModalForTomorrowInitially = false;
+    }
   } catch (error) {
     show.innerHTML = `<h3 class="error">Error fetching data</h3>`;
   }
