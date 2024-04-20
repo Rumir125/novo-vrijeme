@@ -90,7 +90,7 @@ let getWeather = async (event) => {
         show.innerHTML = `<h3 class="error">City not found</h3>`;
         return;
       }
-      const closestLocation = locations[locations.length - 1];
+      const closestLocation = locations[0];
       latitude = closestLocation.latitude;
       longitude = closestLocation.longitude;
       country = closestLocation.country;
