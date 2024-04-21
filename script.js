@@ -7,6 +7,7 @@ const modal = document.getElementById('tempDetailsModal');
 const hourList = document.getElementById('hourList');
 const cityInfo = document.getElementById('cityInfo');
 const bodyWrapper = document.getElementById('body_wrapper');
+const mainImg = document.getElementsByClassName('main-img')[0];
 const localBackendUrl = 'http://localhost:3000';
 const serverUrl = 'https://novovrijeme.com/api/v2';
 
@@ -111,6 +112,7 @@ let getWeather = async (event) => {
     const nextHour = timeSeries[0].data.next_1_hours;
     const weatherDataByDay = getWeatherDataByDay(timeSeries);
 
+    cityInfo.style.display = 'block';
     locationInput.value = '';
     show.innerHTML = `
         <h2 style="text-align:center">
@@ -123,6 +125,17 @@ let getWeather = async (event) => {
  
         </div>
         `;
+
+    if (openModalForTodayInitially) {
+      const id = calculateLocalTime(new Date()).getDate();
+      showHourlyTime(id);
+      return;
+    } else if (openModalForTomorrowInitially) {
+      const id = calculateLocalTime(new Date()).getDate() + 1;
+      showHourlyTime(id);
+      return;
+    }
+
     let tenDaysHtml = ``;
     for (day of weatherDataByDay) {
       const hasPrecipitation = day.precAmount.toFixed(1) > 0;
@@ -152,15 +165,8 @@ let getWeather = async (event) => {
      </div>`;
     }
     tenDays.innerHTML = tenDaysHtml;
-    cityInfo.style.display = 'block';
-    if (openModalForTodayInitially) {
-      handleOpenModal(calculateLocalTime(new Date()).getDate());
-      openModalForTodayInitially = false;
-    } else if (openModalForTomorrowInitially) {
-      handleOpenModal(calculateLocalTime(new Date()).getDate() + 1);
-      openModalForTomorrowInitially = false;
-    }
   } catch (error) {
+    console.log(error);
     show.innerHTML = `<h3 class="error">Error fetching data</h3>`;
   }
 };
@@ -304,10 +310,53 @@ function handleCloseModal() {
   modal.style.display = 'none';
   hourList.innerHTML = '';
   isModalOpen = false;
-  if (window.innerWidth < 760) {
-    bodyWrapper.style.overflow = 'auto';
-    bodyWrapper.style.maxHeight = 'unset';
+  bodyWrapper.style.overflow = 'auto';
+  bodyWrapper.style.maxHeight = 'unset';
+}
+
+function showHourlyTime(id) {
+  let hoursHtml = `<div style="width: 100%;">
+        <div style="display: flex; padding: 8px 16px; width: 100%;column-gap:6px">
+          <div class="hour_container_mob"><p>Sati</p></div>
+          <div style="flex:1">
+          </div>
+          <div class="hour_container_mob">
+            <p>Temperatura</p>
+          </div>
+          <div class="hour_container_mob" style="border-bottom-left-radius:0px;border-bottom-right-radius:0px">
+            <p>Padavine</p>
+          </div>
+        </div>
+    </div>`;
+  mainImg.style.height = '2000px';
+  cityInfo.style.display = 'none';
+  const weatherOfDay = completeWeatherData.filter((item) => calculateLocalTime(item.time).getDate() === id);
+
+  for (day of weatherOfDay) {
+    const localTime = calculateLocalTime(day.time);
+    const next1HoursSummary = day.data.next_1_hours?.summary || day.data.next_6_hours?.summary;
+    const nextHoursDetails = day.data.next_1_hours?.details || day.data.next_6_hours?.details;
+    const temperature = Math.round(day.data?.instant?.details?.air_temperature);
+    const hour = localTime.getHours();
+    hoursHtml += `<div  style="display: flex; padding: 8px 16px; border-bottom: 1px solid gray; align-items: center">
+        <div style="flex: 1">
+          <p>${hour}:00</p>
+        </div>
+        <div style="flex:1">
+          <div style="display:flex; column-gap:8px; max-width:170px">
+            ${next1HoursSummary?.symbol_code ? `<img src="${svgPath}svg/${next1HoursSummary.symbol_code}.svg" alt="weather_icon" width=36 height=36>` : "<div style='width:36px;height:36px'></div>"}
+          </div>
+        </div>
+        <div style="flex: 1; color:#BF3131; ">
+          <p>${temperature}&#8451;</p>
+        </div>
+        <div class="precipitation_amount_container">
+          ${nextHoursDetails?.precipitation_amount ? `<p>${nextHoursDetails.precipitation_amount}mm</p>` : ''}
+        </div>
+     </div>`;
   }
+
+  tenDays.innerHTML = hoursHtml;
 }
 
 modal.onclick = function (event) {

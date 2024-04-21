@@ -178,6 +178,18 @@ body {
   min-height: 23px;
 }
 
+.hour_container_mob {
+  flex: 1;
+  flex-wrap: nowrap;
+  align-self: center;
+  overflow: hidden;
+
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 @media (max-width: 760px) {
   .temp_container {
     display: none;
