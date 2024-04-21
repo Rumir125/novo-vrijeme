@@ -278,7 +278,10 @@ p {
   .popup {
     width: 100%;
     left: 0;
-    top: 50px;
+    top: 0px;
+    border-radius: 0px;
+    max-height: 100vh;
+    height: 100vh;
   }
 }
 
