@@ -204,7 +204,12 @@ const getWeatherDataByDay = (timeseries) => {
       tenDaysData[currentDate].precAmount += nextHours?.precipitation_amount;
     }
   }
-  return Object.values(tenDaysData).slice(0, 10);
+  return Object.values(tenDaysData)
+    .filter((item) => item.maxTemp && item.minTemp)
+    .slice(0, 10)
+    .sort(function (a, b) {
+      return new Date(a.time) - new Date(b.time);
+    });
 };
 let searchTimeout = null;
 const cityList = document.getElementById('cities-list-wrapper');
@@ -283,7 +288,7 @@ function handleOpenModal(id) {
           <p>${temperature}&#8451;</p>
         </div>
         <div class="precipitation_amount_container">
-          ${nextHoursDetails.precipitation_amount ? `<p>${nextHoursDetails.precipitation_amount}mm</p>` : ''}
+          ${nextHoursDetails?.precipitation_amount ? `<p>${nextHoursDetails.precipitation_amount}mm</p>` : ''}
         </div>
      </div>`;
   }
