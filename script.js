@@ -6,6 +6,7 @@ let tenDays = document.getElementById('tenDays');
 const modal = document.getElementById('tempDetailsModal');
 const hourList = document.getElementById('hourList');
 const cityInfo = document.getElementById('cityInfo');
+const bodyWrapper = document.getElementById('body_wrapper');
 const localBackendUrl = 'http://localhost:3000';
 const serverUrl = 'https://novovrijeme.com/api/v2';
 
@@ -265,6 +266,10 @@ window.onkeydown = function (event) {
 function handleOpenModal(id) {
   isModalOpen = true;
   modal.style.display = 'block';
+  if (window.innerWidth < 760) {
+    bodyWrapper.style.overflow = 'hidden';
+    bodyWrapper.style.maxHeight = '100vh';
+  }
   const weatherOfDay = completeWeatherData.filter((item) => calculateLocalTime(item.time).getDate() === id);
   const modalDate = document.getElementById('modal-date');
   const currentDate = new Date(weatherOfDay[0].time);
@@ -299,6 +304,10 @@ function handleCloseModal() {
   modal.style.display = 'none';
   hourList.innerHTML = '';
   isModalOpen = false;
+  if (window.innerWidth < 760) {
+    bodyWrapper.style.overflow = 'auto';
+    bodyWrapper.style.maxHeight = 'unset';
+  }
 }
 
 modal.onclick = function (event) {
