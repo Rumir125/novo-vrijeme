@@ -10,6 +10,7 @@
   --background: rgba(255, 255, 255, 0.1);
   --box_shadow: rgba(3, 46, 87, 0.3);
   --rain-color : rgb(8, 84, 224);
+  color-scheme: only light;
 }
 
 html {
