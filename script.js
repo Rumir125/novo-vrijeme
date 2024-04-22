@@ -8,7 +8,7 @@ const hourList = document.getElementById('hourList');
 const cityInfo = document.getElementById('cityInfo');
 const bodyWrapper = document.getElementById('body_wrapper');
 const mainImg = document.getElementsByClassName('main-img')[0];
-const localBackendUrl = 'http://localhost:3000';
+const localBackendUrl = 'http://localhost:3000/api/v2';
 const serverUrl = 'https://novovrijeme.com/api/v2';
 
 let searchedLocations = [];
